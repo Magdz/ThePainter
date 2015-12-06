@@ -1,5 +1,6 @@
-package model.shapes;
+package models.shapes;
 
+import Models.Layers.Layer;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
@@ -13,7 +14,7 @@ public abstract class Shape {
 	protected double x;
 	protected double y;
 	
-	
+	protected Layer Layer;
 	
 	public Shape(Color color, double length, Color stColor, double stThickness,
 			double x, double y) {
@@ -61,12 +62,8 @@ public abstract class Shape {
 		return y;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
+        public Layer getLayer(){
+            return this.Layer;
+        }
 
 }

@@ -7,20 +7,21 @@ package Models.Layers;
 
 import java.awt.Color;
 import java.util.LinkedList;
-import model.shapes.Shape;
+import javax.swing.JPanel;
+import models.shapes.Shape;
 
 /**
  *
  * @author Ahmed
  */
-public class Layer {
+public class Layer extends JPanel{
     
     private Color Background;
-    private LinkedList<Shape> Shapes;
+    private final LinkedList<Shape> Shapes;
     
     public Layer(){
         this.Background = Color.WHITE;
-        this.Shapes = new LinkedList<Shape>();
+        this.Shapes = new LinkedList<>();
     }
     
     public void addShape(Shape Shape){
@@ -31,10 +32,12 @@ public class Layer {
         this.Shapes.remove(Shape);
     }
 
+    @Override
     public Color getBackground() {
         return Background;
     }
 
+    @Override
     public void setBackground(Color Background) {
         this.Background = Background;
     }
