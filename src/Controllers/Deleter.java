@@ -5,7 +5,6 @@
  */
 package Controllers;
 
-import Models.Layers.Layer;
 import models.shapes.Shape;
 
 /**
@@ -26,8 +25,4 @@ public class Deleter extends Action{
         Shape.getLayer().removeShape(Shape);
     }
     
-    private void deleteLayer(){
-        Layer Layer = (Layer)super.Target;
-        ThePainter.Painter.getLayers().remove();
-    }
 }
