@@ -10,7 +10,7 @@ public abstract class Shape {
     protected double length;
     protected Color stColor;
     protected double stThickness;
-    protected double border;
+   // protected double border;
     protected boolean select;
 
     protected double x;
@@ -94,9 +94,7 @@ public abstract class Shape {
         Layer = layer;
     }
 
-    public void setBorder(double border) {
-        this.border = border;
-    }
+   
 
     public Boolean isSelected() {
         Boolean selected= false;
