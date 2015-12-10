@@ -1,7 +1,13 @@
 package Views;
 
-import java.awt.*;
-import javax.swing.*;
+import Models.Layers.Canvas;
+import java.awt.Color;
+import java.awt.Container;
+import javax.swing.JButton;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
+
 
 /**
  *
@@ -9,7 +15,7 @@ import javax.swing.*;
  */
 public class GUI extends javax.swing.JFrame {
 
-    Canvas c = new Canvas();
+    Canvas canvas = new Canvas();
 
     /**
      * Creates new form GUI
@@ -18,13 +24,14 @@ public class GUI extends javax.swing.JFrame {
         Theme();
         initComponents();
         
-        c.setSize(400, 400);
+        canvas.setSize(400, 400);
         menubarPane.setVisible(false);
         shapesPane.setVisible(false);
         drawArea.setBackground(Color.white);
-        drawArea.add(c);
+        drawArea.add(canvas);
         
         Container layerContainer = new Container();
+        layerContainer.setName("Layers");
         layerTabbed.add(layerContainer);
         layerContainer.setBackground(Color.white);
         
@@ -61,18 +68,6 @@ public class GUI extends javax.swing.JFrame {
         //</editor-fold>
     }
 
-    public class Canvas extends JPanel {
-
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponents(g);
-            super.setOpaque(true);
-            Graphics2D g2d = (Graphics2D) g;
-            g2d.drawRect(30, 30, 40, 40);
-        }
-
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -81,7 +76,6 @@ public class GUI extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         drawArea = new javax.swing.JPanel();
-        jLayeredPane2 = new javax.swing.JLayeredPane();
         jPanel1 = new javax.swing.JPanel();
         Menu = new javax.swing.JButton();
         menubarPane = new javax.swing.JLayeredPane();
@@ -115,6 +109,7 @@ public class GUI extends javax.swing.JFrame {
         jPopupMenu1.getAccessibleContext().setAccessibleParent(Menu);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("The Painter v1.0");
         setFocusable(false);
 
         jPanel2.setOpaque(false);
@@ -124,32 +119,15 @@ public class GUI extends javax.swing.JFrame {
 
         drawArea.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
-        jLayeredPane2.setLayout(jLayeredPane2Layout);
-        jLayeredPane2Layout.setHorizontalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 149, Short.MAX_VALUE)
-        );
-        jLayeredPane2Layout.setVerticalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 133, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout drawAreaLayout = new javax.swing.GroupLayout(drawArea);
         drawArea.setLayout(drawAreaLayout);
         drawAreaLayout.setHorizontalGroup(
             drawAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(drawAreaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(817, Short.MAX_VALUE))
+            .addGap(0, 976, Short.MAX_VALUE)
         );
         drawAreaLayout.setVerticalGroup(
             drawAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(drawAreaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(568, Short.MAX_VALUE))
+            .addGap(0, 712, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Untitled 1", drawArea);
@@ -165,18 +143,6 @@ public class GUI extends javax.swing.JFrame {
         Menu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 MenuMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                MenuMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                MenuMouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                MenuMousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                MenuMouseReleased(evt);
             }
         });
 
@@ -257,11 +223,6 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        menubarPane.setLayer(menu_new, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        menubarPane.setLayer(menu_save, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        menubarPane.setLayer(menu_import, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        menubarPane.setLayer(menu_export, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         javax.swing.GroupLayout menubarPaneLayout = new javax.swing.GroupLayout(menubarPane);
         menubarPane.setLayout(menubarPaneLayout);
         menubarPaneLayout.setHorizontalGroup(
@@ -283,6 +244,10 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(menu_export, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(438, Short.MAX_VALUE))
         );
+        menubarPane.setLayer(menu_new, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        menubarPane.setLayer(menu_save, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        menubarPane.setLayer(menu_import, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        menubarPane.setLayer(menu_export, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         tool_cursor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Assets/Cursor-15.png"))); // NOI18N
         tool_cursor.setContentAreaFilled(false);
@@ -497,13 +462,6 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        shapesPane.setLayer(shape_oval, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_circle, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_rect, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_square, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_line, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_tri, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         javax.swing.GroupLayout shapesPaneLayout = new javax.swing.GroupLayout(shapesPane);
         shapesPane.setLayout(shapesPaneLayout);
         shapesPaneLayout.setHorizontalGroup(
@@ -536,6 +494,12 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(shape_tri))
                 .addGap(0, 11, Short.MAX_VALUE))
         );
+        shapesPane.setLayer(shape_oval, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_circle, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_rect, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_square, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_line, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_tri, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         tool_undo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Assets/Undo.png"))); // NOI18N
         tool_undo.setContentAreaFilled(false);
@@ -785,22 +749,6 @@ public class GUI extends javax.swing.JFrame {
         Style.pressed(TargetButton);
     }//GEN-LAST:event_buttons_pressed
 
-    private void MenuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuMouseReleased
-        
-    }//GEN-LAST:event_MenuMouseReleased
-
-    private void MenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuMouseExited
-
-    }//GEN-LAST:event_MenuMouseExited
-
-    private void MenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MenuMouseEntered
-
-    private void MenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MenuMousePressed
-
     private void MenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuMouseClicked
         if (menubarPane.isVisible() == true) {
             menubarPane.setVisible(false);
@@ -809,45 +757,9 @@ public class GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_MenuMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GUI().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Menu;
     private javax.swing.JPanel drawArea;
-    private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
