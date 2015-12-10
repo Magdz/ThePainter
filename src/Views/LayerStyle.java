@@ -35,13 +35,17 @@ public class LayerStyle extends JPanel {
     public LayerStyle(Container container) {
         this.container = container;
     }
+
+    LayerStyle() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
-    public void addComp ()
+    public void addComp (String text, Container container)
     {
         container.setLayout(new BoxLayout(container,BoxLayout.Y_AXIS));
 
-        addLabel("Layer1",container);
-        addLabel("Layer2",container);
+        addLabel(text,container);
+        
 
     }
     
@@ -51,7 +55,7 @@ public class LayerStyle extends JPanel {
         label.setText(text);
         panel.add(label);
 
-        panel.setBorder(BorderFactory.createLoweredBevelBorder());
+        panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         panel.setMaximumSize(new Dimension(Integer.MAX_VALUE,panel.getMinimumSize().height));
 
         container.add(panel);
