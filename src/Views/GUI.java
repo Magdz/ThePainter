@@ -17,13 +17,20 @@ public class GUI extends javax.swing.JFrame {
     public GUI() {
         Theme();
         initComponents();
-        drawArea.setBackground(Color.white);
-        drawArea.add(c);
+        
         c.setSize(400, 400);
         menubarPane.setVisible(false);
         shapesPane.setVisible(false);
-        LayerStyle layer = new LayerStyle();
-        layer.setContainer("Layer 1", layerPane);
+        drawArea.setBackground(Color.white);
+        drawArea.add(c);
+        
+        Container layerContainer = new Container();
+        layerTabbed.add(layerContainer);
+        layerContainer.setBackground(Color.white);
+        
+        LayerStyle layer = new LayerStyle(layerContainer);
+        layer.addComp("Layer 1", layerContainer);
+        
     }
 
     private void Theme() {
@@ -61,6 +68,7 @@ public class GUI extends javax.swing.JFrame {
             super.paintComponents(g);
             super.setOpaque(true);
             Graphics2D g2d = (Graphics2D) g;
+            g2d.drawRect(30, 30, 40, 40);
         }
 
     }
@@ -102,8 +110,7 @@ public class GUI extends javax.swing.JFrame {
         tool_eraser = new javax.swing.JButton();
         tool_stroke = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        layerPane = new javax.swing.JPanel();
+        layerTabbed = new javax.swing.JTabbedPane();
         jPopupMenu1.getAccessibleContext().setAccessibleName("");
         jPopupMenu1.getAccessibleContext().setAccessibleParent(Menu);
 
@@ -715,19 +722,6 @@ public class GUI extends javax.swing.JFrame {
             .addGap(0, 249, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout layerPaneLayout = new javax.swing.GroupLayout(layerPane);
-        layerPane.setLayout(layerPaneLayout);
-        layerPaneLayout.setHorizontalGroup(
-            layerPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 187, Short.MAX_VALUE)
-        );
-        layerPaneLayout.setVerticalGroup(
-            layerPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 253, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Layers", layerPane);
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -739,7 +733,7 @@ public class GUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane1))
+                    .addComponent(layerTabbed))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -753,7 +747,7 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(layerTabbed, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(180, 180, 180))
         );
 
@@ -766,7 +760,7 @@ public class GUI extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 593, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -859,9 +853,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JPanel layerPane;
+    private javax.swing.JTabbedPane layerTabbed;
     private javax.swing.JButton menu_export;
     private javax.swing.JButton menu_import;
     private javax.swing.JButton menu_new;

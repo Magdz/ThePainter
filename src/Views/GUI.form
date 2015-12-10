@@ -66,7 +66,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jPanel4" max="32767" attributes="0"/>
-                      <Component id="jTabbedPane1" max="32767" attributes="0"/>
+                      <Component id="layerTabbed" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -84,7 +84,7 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jTabbedPane1" min="-2" pref="281" max="-2" attributes="0"/>
+                  <Component id="layerTabbed" min="-2" pref="281" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="180" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -691,33 +691,9 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+        <Container class="javax.swing.JTabbedPane" name="layerTabbed">
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
-          <SubComponents>
-            <Container class="javax.swing.JPanel" name="layerPane">
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="Layers">
-                    <Property name="tabTitle" type="java.lang.String" value="Layers"/>
-                  </JTabbedPaneConstraints>
-                </Constraint>
-              </Constraints>
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="187" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="253" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-            </Container>
-          </SubComponents>
         </Container>
       </SubComponents>
     </Container>
