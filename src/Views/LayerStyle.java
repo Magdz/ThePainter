@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package View;
+package Views;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -17,7 +17,7 @@ import javax.swing.JPanel;
  *
  * @author dinan
  */
-public class Layer extends JPanel {
+public class LayerStyle extends JPanel {
 
     final private JPanel container = new JPanel();
     final private JLabel label = new JLabel();
