@@ -5,7 +5,7 @@
  */
 package Models.Layers;
 
-import java.util.LinkedList;
+import Views.GUI;
 
 /**
  *
@@ -13,9 +13,17 @@ import java.util.LinkedList;
  */
 public class Painter {
     
+    private GUI GUI;
     private final Canvas Canvas;
     
     public Painter(){
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GUI = new GUI();
+                GUI.setVisible(true);
+            }
+        });
         Canvas = new Canvas();
     }
     
