@@ -5,65 +5,114 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 public abstract class Shape {
-	
-	protected Color color;
-	protected double length;
-	protected Color stColor;
-	protected double stThickness;
-	
-	protected double x;
-	protected double y;
-	
-	protected Layer Layer;
-	
-	public Shape(Color color, double length, Color stColor, double stThickness,
-			double x, double y) {
-		this.color = color;
-		this.length = length;
-		this.stColor = stColor;
-		this.stThickness = stThickness;
-		this.x = x;
-		this.y = y;
-	}
-	
-	
-	public abstract void Draw (Graphics2D g);
-	public abstract Boolean isSelected();
-	public abstract void setBorder();
-	public abstract void setColor();
 
+    protected Color color;
+    protected double length;
+    protected Color stColor;
+    protected double stThickness;
+    protected double border;
+    protected boolean select;
 
-	public Color getColor() {
-		return color;
-	}
+    protected double x;
+    protected double y;
 
+    protected Layer Layer;
 
-	public double getLength() {
-		return length;
-	}
+    public Shape(Color color, double length, Color stColor, double stThickness,
+            double x, double y) {
+        this.color = color;
+        this.length = length;
+        this.stColor = stColor;
+        this.stThickness = stThickness;
+        this.x = x;
+        this.y = y;
+    }
 
+    public abstract void Draw(Graphics2D g);
 
-	public Color getStColor() {
-		return stColor;
-	}
+    public void setSelected(boolean selected) {
+        this.select = selected;
+    }
 
+    public Boolean getSelected() {
+        return select;
+    }
 
-	public double getStThickness() {
-		return stThickness;
-	}
+    public Color getColor() {
+        return color;
+    }
 
+    public double getLength() {
+        return length;
+    }
 
-	public double getX() {
-		return x;
-	}
+    public Color getStColor() {
+        return stColor;
+    }
 
+    public double getStThickness() {
+        return stThickness;
+    }
 
-	public double getY() {
-		return y;
-	}
-	
-        public Layer getLayer(){
-            return this.Layer;
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public Layer getLayer() {
+        return this.Layer;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public void setLength(double length) {
+        this.length = length;
+    }
+
+    public void setStColor(Color stColor) {
+        this.stColor = stColor;
+    }
+
+    public void setStThickness(double stThickness) {
+        this.stThickness = stThickness;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public void setLayer(Layer layer) {
+        Layer = layer;
+    }
+
+    public void setBorder(double border) {
+        this.border = border;
+    }
+
+    public Boolean isSelected() {
+        Boolean selected= false;
+        if (getSelected()) {
+            selected = true;
+        } else {
+            selected = false;
         }
+
+        return selected;
+
+    }
+
+    public void select() {
+
+        setSelected(true);
+    }
 
 }
