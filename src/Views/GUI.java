@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Point;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import models.shapes.*;
@@ -30,6 +31,7 @@ public class GUI extends javax.swing.JFrame {
         Theme();
         initComponents();
         
+        colorPanel.setVisible(false);
         menubarPane.setVisible(false);
         shapesPane.setVisible(false);
         canvas = new Canvas();
@@ -43,6 +45,12 @@ public class GUI extends javax.swing.JFrame {
         
         LayerStyle layer = new LayerStyle(layerContainer);
         layer.addComp("Layer 1", layerContainer);
+        
+        ColorChooser colorchooser = new ColorChooser();
+        colorchooser.setSize(colorPanel.getSize());
+        colorPanel.add(colorchooser);
+        
+        
     }
 
     private void Theme() {
@@ -108,6 +116,7 @@ public class GUI extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         tool_eraser = new javax.swing.JButton();
         tool_stroke = new javax.swing.JButton();
+        colorPanel = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         layerTabbed = new javax.swing.JTabbedPane();
         jPopupMenu1.getAccessibleContext().setAccessibleName("");
@@ -236,6 +245,11 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        menubarPane.setLayer(menu_new, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        menubarPane.setLayer(menu_save, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        menubarPane.setLayer(menu_import, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        menubarPane.setLayer(menu_export, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout menubarPaneLayout = new javax.swing.GroupLayout(menubarPane);
         menubarPane.setLayout(menubarPaneLayout);
         menubarPaneLayout.setHorizontalGroup(
@@ -257,10 +271,6 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(menu_export, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(438, Short.MAX_VALUE))
         );
-        menubarPane.setLayer(menu_new, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        menubarPane.setLayer(menu_save, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        menubarPane.setLayer(menu_import, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        menubarPane.setLayer(menu_export, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         tool_cursor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Assets/Cursor-15.png"))); // NOI18N
         tool_cursor.setContentAreaFilled(false);
@@ -317,6 +327,9 @@ public class GUI extends javax.swing.JFrame {
         tool_paint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Assets/Paint Bucket Filled-15.png"))); // NOI18N
         tool_paint.setContentAreaFilled(false);
         tool_paint.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tool_paintMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 buttons_entered(evt);
             }
@@ -505,6 +518,13 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        shapesPane.setLayer(shape_oval, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_circle, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_rect, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_square, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_line, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_tri, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout shapesPaneLayout = new javax.swing.GroupLayout(shapesPane);
         shapesPane.setLayout(shapesPaneLayout);
         shapesPaneLayout.setHorizontalGroup(
@@ -537,12 +557,6 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(shape_tri))
                 .addGap(0, 11, Short.MAX_VALUE))
         );
-        shapesPane.setLayer(shape_oval, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_circle, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_rect, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_square, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_line, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_tri, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         tool_undo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Assets/Undo.png"))); // NOI18N
         tool_undo.setContentAreaFilled(false);
@@ -649,6 +663,17 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout colorPanelLayout = new javax.swing.GroupLayout(colorPanel);
+        colorPanel.setLayout(colorPanelLayout);
+        colorPanelLayout.setHorizontalGroup(
+            colorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 193, Short.MAX_VALUE)
+        );
+        colorPanelLayout.setVerticalGroup(
+            colorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 132, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -670,12 +695,14 @@ public class GUI extends javax.swing.JFrame {
                                 .addComponent(tool_crop, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jSeparator1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(shapesPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(shapesPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(colorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(tool_stroke, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addComponent(tool_eraser, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(menubarPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -685,35 +712,40 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(Menu)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tool_cursor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tool_pencil)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tool_eraser)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tool_stroke)
-                        .addGap(10, 10, 10)
-                        .addComponent(tool_brush)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tool_paint)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tool_crop)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(45, 45, 45)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(215, 215, 215)
                                 .addComponent(tool_shape)
                                 .addGap(18, 18, 18)
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(3, 3, 3)
-                                .addComponent(tool_undo))
-                            .addComponent(shapesPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tool_redo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tool_resize)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tool_rotate))
+                                .addComponent(tool_undo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tool_redo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tool_resize)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tool_rotate))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(tool_cursor)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tool_pencil)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tool_eraser)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tool_stroke)
+                                .addGap(10, 10, 10)
+                                .addComponent(tool_brush)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(tool_paint)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(tool_crop)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(shapesPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(colorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(menubarPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -777,6 +809,16 @@ public class GUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void drawAreaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_drawAreaMousePressed
+        drawStart = drawArea.getMousePosition();
+    }//GEN-LAST:event_drawAreaMousePressed
+
+    private void drawAreaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_drawAreaMouseReleased
+        drawEnd = drawArea.getMousePosition();
+        if(TargetShape == null)return;
+        Drawer drawer = new Drawer(canvas,TargetShape,drawStart,drawEnd);
+    }//GEN-LAST:event_drawAreaMouseReleased
+
     private void buttons_entered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons_entered
         JButton TargetButton = (JButton) evt.getSource();
         ButtonStyle Style = new ButtonStyle(TargetButton);
@@ -800,43 +842,25 @@ public class GUI extends javax.swing.JFrame {
         System.out.println("Hi");
     }//GEN-LAST:event_tool_strokeMouseClicked
 
-    private void shape_squareMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_shape_squareMouseClicked
+    private void shape_triActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shape_triActionPerformed
+        TargetShape = "Triangle";
+    }//GEN-LAST:event_shape_triActionPerformed
 
-    }//GEN-LAST:event_shape_squareMouseClicked
-
-    private void MenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuMouseClicked
-        if (menubarPane.isVisible() == true) {
-            menubarPane.setVisible(false);
-        } else {
-            menubarPane.setVisible(true);
-        }
-    }//GEN-LAST:event_MenuMouseClicked
-
-    private void drawAreaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_drawAreaMousePressed
-        drawStart = drawArea.getMousePosition();
-    }//GEN-LAST:event_drawAreaMousePressed
-
-    private void drawAreaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_drawAreaMouseReleased
-        drawEnd = drawArea.getMousePosition();
-        if(TargetShape == null)return;
-        Drawer drawer = new Drawer(canvas,TargetShape,drawStart,drawEnd);
-    }//GEN-LAST:event_drawAreaMouseReleased
-
-    private void shape_rectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_shape_rectMouseClicked
-        TargetShape = "Rectangle";
-    }//GEN-LAST:event_shape_rectMouseClicked
-
-    private void tool_shapeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tool_shapeActionPerformed
-        if (shapesPane.isVisible() == true) {
-            shapesPane.setVisible(false);
-        } else {
-            shapesPane.setVisible(true);
-        }
-    }//GEN-LAST:event_tool_shapeActionPerformed
+    private void shape_lineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shape_lineActionPerformed
+        TargetShape = "Line";
+    }//GEN-LAST:event_shape_lineActionPerformed
 
     private void shape_squareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shape_squareActionPerformed
         TargetShape = "Square";
     }//GEN-LAST:event_shape_squareActionPerformed
+
+    private void shape_squareMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_shape_squareMouseClicked
+
+    }//GEN-LAST:event_shape_squareMouseClicked
+
+    private void shape_rectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_shape_rectMouseClicked
+        TargetShape = "Rectangle";
+    }//GEN-LAST:event_shape_rectMouseClicked
 
     private void shape_circleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shape_circleActionPerformed
         TargetShape = "Circle";
@@ -846,16 +870,33 @@ public class GUI extends javax.swing.JFrame {
         TargetShape = "Ellipse";
     }//GEN-LAST:event_shape_ovalActionPerformed
 
-    private void shape_triActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shape_triActionPerformed
-        TargetShape = "Triangle";
-    }//GEN-LAST:event_shape_triActionPerformed
+    private void tool_shapeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tool_shapeActionPerformed
+        if (shapesPane.isVisible() == true) {
+            shapesPane.setVisible(false);
+        } else {
+            shapesPane.setVisible(true);
+        }
+    }//GEN-LAST:event_tool_shapeActionPerformed
 
-    private void shape_lineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shape_lineActionPerformed
-        TargetShape = "Line";
-    }//GEN-LAST:event_shape_lineActionPerformed
+    private void MenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuMouseClicked
+        if (menubarPane.isVisible() == true) {
+            menubarPane.setVisible(false);
+        } else {
+            menubarPane.setVisible(true);
+        }
+    }//GEN-LAST:event_MenuMouseClicked
+
+    private void tool_paintMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tool_paintMouseClicked
+         if (colorPanel.isVisible() == true) {
+            colorPanel.setVisible(false);
+        } else {
+            colorPanel.setVisible(true);
+        }
+    }//GEN-LAST:event_tool_paintMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Menu;
+    private javax.swing.JPanel colorPanel;
     private javax.swing.JPanel drawArea;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
