@@ -14,9 +14,9 @@ public class Elipse extends Shape {
     protected double height;
     protected double width;
 
-    public Elipse(Color color, double length, Color stColor,
+    public Elipse(Color color, Color stColor,
             double stThickness, double x, double y, double height, double width) {
-        super(color, length, stColor, stThickness, x, y);
+        super(color,stColor, stThickness, x, y);
         //   this.radius = radius;
         this.height = height;
         this.width = width;
@@ -32,7 +32,11 @@ public class Elipse extends Shape {
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setStroke(new BasicStroke((float) stThickness));
         g.setColor(color);
+        if(isFill())
+        g.fill(new Ellipse2D.Double(x, y, width, height));
+        else
         g.draw(new Ellipse2D.Double(x, y, width, height));
+
 
     }
 

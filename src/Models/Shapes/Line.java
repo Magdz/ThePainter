@@ -21,9 +21,9 @@ public class Line extends Shape {
 
 	
 
-	public Line(Color color, double length, Color stColor, double stThickness,
+	public Line(Color color, Color stColor, double stThickness,
 			double x,double x1, double y, double y1) {
-		super(color, length, stColor, stThickness, x, y);
+		super(color, stColor, stThickness, x, y);
 		
 		this.x1=x1;
 		this.y1=y1;

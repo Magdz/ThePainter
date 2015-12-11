@@ -15,7 +15,7 @@ public class Rectangle extends Polygon {
     private double y;
     
     public Rectangle(double x1, double y1, double x2, double y2, Color color) {
-        super(color,5,color,5,Math.min(x1,x2),Math.min(y1, y2),4);
+        super(color,color,5,Math.min(x1,x2),Math.min(y1, y2),4);
         this.x = Math.min(x1,x2);
         this.y = Math.min(y1, y2);
         this.height = Math.abs(y1-y2);
@@ -27,6 +27,10 @@ public class Rectangle extends Polygon {
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setColor(color);
         g.setStroke(new BasicStroke((float) stThickness));
+        
+        if(isFill())
+        g.fill(new Rectangle2D.Double(x, y, width, height));
+        else
         g.draw(new Rectangle2D.Double(x, y, width, height));
     }
 

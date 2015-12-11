@@ -7,21 +7,22 @@ import java.awt.Graphics2D;
 public abstract class Shape {
 
     protected Color color;
-    protected double length;
+   // protected double length;
     protected Color stColor;
     protected double stThickness;
    // protected double border;
     protected boolean select;
+    protected boolean fill;
 
     protected double x;
     protected double y;
 
     protected Layer Layer;
 
-    public Shape(Color color, double length, Color stColor, double stThickness,
+    public Shape(Color color, Color stColor, double stThickness,
             double x, double y) {
         this.color = color;
-        this.length = length;
+      //  this.length = length;
         this.stColor = stColor;
         this.stThickness = stThickness;
         this.x = x;
@@ -42,9 +43,7 @@ public abstract class Shape {
         return color;
     }
 
-    public double getLength() {
-        return length;
-    }
+  
 
     public Color getStColor() {
         return stColor;
@@ -70,9 +69,7 @@ public abstract class Shape {
         this.color = color;
     }
 
-    public void setLength(double length) {
-        this.length = length;
-    }
+   
 
     public void setStColor(Color stColor) {
         this.stColor = stColor;
@@ -112,5 +109,15 @@ public abstract class Shape {
 
         setSelected(true);
     }
+
+    public boolean isFill() {
+        return fill;
+    }
+
+    public void setFill(boolean fill) {
+        this.fill = fill;
+    }
+    
+    
 
 }

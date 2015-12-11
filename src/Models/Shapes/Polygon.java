@@ -14,9 +14,9 @@ public class Polygon extends Shape {
 
         // x y arrays takes x y points of the polygon
         //sides = array.length
-	public Polygon(Color color, double length, Color stColor,
+	public Polygon(Color color, Color stColor,
 			double stThickness, double firstPointX, double firstPointY ,int sides) { // need to call setPoints to set x y points of the polygon
-		super(color, length, stColor, stThickness,firstPointX,firstPointY);
+		super(color, stColor, stThickness,firstPointX,firstPointY);
 		this.sides=sides;
                
 	}
@@ -27,7 +27,11 @@ public class Polygon extends Shape {
            g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
            g.setColor(color);
            g.setStroke(new BasicStroke((float) stThickness));
+           if(isFill())
+           g.fillPolygon(xPoints,yPoints,sides);
+           else
            g.drawPolygon(xPoints,yPoints,sides);
+
 		
 	}
         
