@@ -8,8 +8,8 @@ import java.awt.RenderingHints;
 public class Polygon extends Shape {
 	
 	protected int sides;
-        private int[] xPoints;
-        private int[] yPoints;
+        private final int[] xPoints;
+        private final int[] yPoints;
 	
 
         // x y arrays takes x y points of the polygon

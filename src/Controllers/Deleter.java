@@ -5,8 +5,6 @@
  */
 package Controllers;
 
-import models.shapes.Shape;
-
 /**
  *
  * @author Ahmed
@@ -14,15 +12,7 @@ import models.shapes.Shape;
 public class Deleter extends Action{
 
     public Deleter(Object Model) {
-        super(Model);
-        if(super.TargetType == Type.Shape);
-        if(super.TargetType == Type.Layer);
-        if(super.TargetType == Type.Shapes);
-    }
-    
-    private void deleteShape(){
-        Shape Shape = (Shape)super.Target;
-        Shape.getLayer().removeShape(Shape);
+        
     }
     
 }

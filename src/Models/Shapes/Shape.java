@@ -12,7 +12,7 @@ public abstract class Shape {
     protected double stThickness;
    // protected double border;
     protected boolean select;
-    protected boolean fill;
+    protected boolean fill = true;
 
     protected double x;
     protected double y;

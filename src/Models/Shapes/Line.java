@@ -3,16 +3,9 @@ package models.shapes;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.Stroke;
 import java.awt.geom.*;
-import java.awt.geom.Line2D.Double;
-import java.awt.geom.Line2D.Float;
-import java.awt.*;
 import java.awt.BasicStroke;
 
-import javax.swing.JApplet;
-
-import com.sun.javafx.geom.Point2D;
 
 public class Line extends Shape {
 	
