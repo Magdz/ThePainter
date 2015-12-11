@@ -5,9 +5,8 @@ import java.awt.Color;
 public class Square extends Rectangle {
 	
 
-	public Square(Color color, double length, Color stColor,
-	        	double stThickness, double x, double y) {
-		super(color, length, stColor, stThickness, x, y, length,length); //length=width
+	public Square(double x1, double y1, double x2 , double y2, Color color) {
+		super(x1, y1, x2, y2, color); //length=width
 		
 		
 	}
