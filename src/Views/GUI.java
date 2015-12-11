@@ -812,6 +812,8 @@ public class GUI extends javax.swing.JFrame {
 
     private void drawAreaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_drawAreaMousePressed
         shapesPane.setVisible(false);
+        colorPanel.setVisible(false);
+        menubarPane.setVisible(false);
         drawStart = drawArea.getMousePosition();
     }//GEN-LAST:event_drawAreaMousePressed
 
@@ -824,6 +826,7 @@ public class GUI extends javax.swing.JFrame {
         }else if(TargetTool == "Selecting"){
             canvas.unselectAll();
             Shape shape = canvas.getShape(drawStart);
+            if(shape == null)return;
             shape.select();
             repaint();
         }
