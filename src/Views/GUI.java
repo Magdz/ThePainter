@@ -664,6 +664,11 @@ public class GUI extends javax.swing.JFrame {
                 buttons_entered(evt);
             }
         });
+        tool_eraser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tool_eraserActionPerformed(evt);
+            }
+        });
 
         tool_stroke.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Assets/Pencil Sharpener-10.png"))); // NOI18N
         tool_stroke.setContentAreaFilled(false);
@@ -829,6 +834,8 @@ public class GUI extends javax.swing.JFrame {
             if(shape == null)return;
             shape.select();
             repaint();
+        }else if(TargetTool == "Deleting"){
+            Deleter deleter = new Deleter(canvas,drawStart);
         }
         
     }//GEN-LAST:event_drawAreaMouseReleased
@@ -920,6 +927,10 @@ public class GUI extends javax.swing.JFrame {
     private void tool_cursorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tool_cursorMouseClicked
         TargetTool = "Selecting";
     }//GEN-LAST:event_tool_cursorMouseClicked
+
+    private void tool_eraserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tool_eraserActionPerformed
+        TargetTool = "Deleting";
+    }//GEN-LAST:event_tool_eraserActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Menu;

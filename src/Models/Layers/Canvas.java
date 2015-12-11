@@ -57,9 +57,15 @@ public class Canvas extends JPanel{
         return null;
     }
     
+    public void delete(Shape shape){
+        shapes.remove(shape);
+        repaint();
+    }
+    
     public void unselectAll(){
         shapes.stream().forEach((shape) -> {
             shape.setSelected(false);
         });
+        repaint();
     }
 }
