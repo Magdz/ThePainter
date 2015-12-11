@@ -11,6 +11,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import javax.swing.JPanel;
@@ -45,5 +46,14 @@ public class Canvas extends JPanel{
     public void addShape(Shape Shape){
         shapes.add(Shape);
         repaint();
+    }
+    
+    public Shape getShape(Point2D Point){
+        for(Shape shape: shapes){
+            if(shape.contains(Point)){
+                return shape;
+            }
+        }
+        return null;
     }
 }

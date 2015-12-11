@@ -12,7 +12,7 @@ public abstract class Shape {
     protected Color stColor;
     protected double stThickness;
    // protected double border;
-    protected boolean select;
+    protected boolean select = false;
     protected boolean fill = true;
 
     protected double x;
@@ -95,7 +95,7 @@ public abstract class Shape {
    
 
     public Boolean isSelected() {
-        Boolean selected= false;
+        Boolean selected = false;
         if (getSelected()) {
             selected = true;
         } else {
@@ -107,7 +107,6 @@ public abstract class Shape {
     }
 
     public void select() {
-
         setSelected(true);
     }
 

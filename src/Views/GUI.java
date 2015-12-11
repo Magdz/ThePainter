@@ -8,6 +8,7 @@ import java.awt.Point;
 import javax.swing.JButton;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import models.shapes.*;
 
 /**
  *
@@ -819,7 +820,9 @@ public class GUI extends javax.swing.JFrame {
             CurrentColor = colorchooser.getColor();
             Drawer drawer = new Drawer(canvas, TargetShape, drawStart, drawEnd,CurrentColor);
         }else if(TargetTool == "Selecting"){
-            
+            Shape shape = canvas.getShape(drawStart);
+            shape.select();
+            repaint();
         }
         
     }//GEN-LAST:event_drawAreaMouseReleased
