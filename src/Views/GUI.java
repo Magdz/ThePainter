@@ -16,6 +16,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class GUI extends javax.swing.JFrame {
 
     Canvas canvas;
+    ColorChooser colorchooser;
     Point drawStart, drawEnd;
     String TargetTool = null;
     String TargetShape = null;
@@ -43,7 +44,7 @@ public class GUI extends javax.swing.JFrame {
         LayerStyle layer = new LayerStyle(layerContainer);
         layer.addComp("Layer 1", layerContainer);
 
-        ColorChooser colorchooser = new ColorChooser();
+        colorchooser = new ColorChooser();
         colorchooser.setSize(colorPanel.getSize());
         colorPanel.add(colorchooser);
     }
@@ -815,6 +816,7 @@ public class GUI extends javax.swing.JFrame {
     private void drawAreaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_drawAreaMouseReleased
         drawEnd = drawArea.getMousePosition();
         if (TargetTool == "Drawing" && TargetShape != null) {
+            CurrentColor = colorchooser.getColor();
             Drawer drawer = new Drawer(canvas, TargetShape, drawStart, drawEnd,CurrentColor);
         }else if(TargetTool == "Selecting"){
             
