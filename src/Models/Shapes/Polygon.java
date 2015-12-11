@@ -28,11 +28,13 @@ public class Polygon extends Shape {
            g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
            g.setColor(color);
            g.setStroke(new BasicStroke((float) stThickness));
-           if(isFill())
-           g.fillPolygon(xPoints,yPoints,sides);
+           if(isFill()){
+               g.fillPolygon(xPoints,yPoints,sides);
+               g.setColor(Color.YELLOW);
+               g.drawPolygon(xPoints,yPoints,sides);
+           }
            else
-           g.drawPolygon(xPoints,yPoints,sides);
-
+                g.drawPolygon(xPoints,yPoints,sides);
 		
 	}
         

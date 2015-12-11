@@ -28,10 +28,13 @@ public class Rectangle extends Polygon {
         g.setColor(color);
         g.setStroke(new BasicStroke((float) stThickness));
         
-        if(isFill())
-        g.fill(new Rectangle2D.Double(x, y, width, height));
+        if(isFill()){
+            g.fill(new Rectangle2D.Double(x, y, width, height));
+            g.setColor(Color.blue);
+            g.draw(new Rectangle2D.Double(x, y, width+stThickness/2, height+stThickness/2));
+        }
         else
-        g.draw(new Rectangle2D.Double(x, y, width, height));
+            g.draw(new Rectangle2D.Double(x, y, width, height));
     }
 
     public double getHeight() {

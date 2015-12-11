@@ -28,13 +28,16 @@ public class Elipse extends Shape {
        // Border lineborder = BorderFactory.createLineBorder(color,(int)stThickness);
 
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setStroke(new BasicStroke((float) stThickness));
+        BasicStroke basicStroke = new BasicStroke((float) stThickness);
+        g.setStroke(basicStroke);
         g.setColor(color);
-        if(isFill())
-        g.fill(new Ellipse2D.Double(x, y, width, height));
+        if(isFill()){
+            g.fill(new Ellipse2D.Double(x, y, width, height));
+            g.setColor(Color.YELLOW);
+            g.draw(new Ellipse2D.Double(x, y, width+stThickness/2, height+stThickness/2));
+        }
         else
-        g.draw(new Ellipse2D.Double(x, y, width, height));
-
+            g.draw(new Ellipse2D.Double(x, y, width, height));
 
     }
 

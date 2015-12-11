@@ -49,7 +49,7 @@ public class Drawer extends Action {
                 canvas.addShape(new Square(drawStart.x,drawStart.y,drawEnd.x,drawEnd.y, Color.YELLOW));
                 break;
             case "Ellipse":
-                canvas.addShape(new Elipse(Color.RED,Color.RED,1,Math.min(drawStart.x, drawEnd.x),Math.min(drawStart.y, drawEnd.y), Math.abs(drawStart.y-drawEnd.y), Math.abs((drawStart.x-drawEnd.x))));
+                canvas.addShape(new Elipse(Color.RED,Color.YELLOW,5,Math.min(drawStart.x, drawEnd.x),Math.min(drawStart.y, drawEnd.y), Math.abs(drawStart.y-drawEnd.y), Math.abs((drawStart.x-drawEnd.x))));
                 break;
             case "Circle":
                 canvas.addShape(new Circle(Color.RED,Color.RED,1,Math.min(drawStart.x, drawEnd.x),Math.min(drawStart.y, drawEnd.y), Math.abs((drawStart.x-drawEnd.x)/2)));
