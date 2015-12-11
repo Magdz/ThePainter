@@ -6,10 +6,8 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Point;
 import javax.swing.JButton;
-import javax.swing.JColorChooser;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import models.shapes.*;
 
 /**
  *
@@ -19,8 +17,9 @@ public class GUI extends javax.swing.JFrame {
 
     Canvas canvas;
     Point drawStart, drawEnd;
+    String TargetTool = null;
     String TargetShape = null;
-    Color CurrentColor = null;
+    Color CurrentColor = Color.BLACK;
 
     /**
      * Creates new form GUI
@@ -47,7 +46,6 @@ public class GUI extends javax.swing.JFrame {
         ColorChooser colorchooser = new ColorChooser();
         colorchooser.setSize(colorPanel.getSize());
         colorPanel.add(colorchooser);
-
     }
 
     private void Theme() {
@@ -142,7 +140,7 @@ public class GUI extends javax.swing.JFrame {
         colorPanel.setLayout(colorPanelLayout);
         colorPanelLayout.setHorizontalGroup(
             colorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 430, Short.MAX_VALUE)
+            .addGap(0, 656, Short.MAX_VALUE)
         );
         colorPanelLayout.setVerticalGroup(
             colorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,13 +283,6 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        shapesPane.setLayer(shape_oval, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_circle, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_rect, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_square, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_line, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_tri, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         javax.swing.GroupLayout shapesPaneLayout = new javax.swing.GroupLayout(shapesPane);
         shapesPane.setLayout(shapesPaneLayout);
         shapesPaneLayout.setHorizontalGroup(
@@ -326,6 +317,12 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(shape_line))
                     .addComponent(shape_tri)))
         );
+        shapesPane.setLayer(shape_oval, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_circle, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_rect, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_square, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_line, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_tri, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout drawAreaLayout = new javax.swing.GroupLayout(drawArea);
         drawArea.setLayout(drawAreaLayout);
@@ -335,7 +332,7 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(shapesPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(colorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(430, Short.MAX_VALUE))
+                .addContainerGap(204, Short.MAX_VALUE))
         );
         drawAreaLayout.setVerticalGroup(
             drawAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -442,11 +439,6 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        menubarPane.setLayer(menu_new, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        menubarPane.setLayer(menu_save, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        menubarPane.setLayer(menu_import, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        menubarPane.setLayer(menu_export, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         javax.swing.GroupLayout menubarPaneLayout = new javax.swing.GroupLayout(menubarPane);
         menubarPane.setLayout(menubarPaneLayout);
         menubarPaneLayout.setHorizontalGroup(
@@ -468,11 +460,18 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(menu_export, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(438, Short.MAX_VALUE))
         );
+        menubarPane.setLayer(menu_new, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        menubarPane.setLayer(menu_save, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        menubarPane.setLayer(menu_import, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        menubarPane.setLayer(menu_export, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         tool_cursor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Assets/Cursor-15.png"))); // NOI18N
         tool_cursor.setContentAreaFilled(false);
         tool_cursor.setName("cursor"); // NOI18N
         tool_cursor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tool_cursorMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 buttons_entered(evt);
             }
@@ -576,11 +575,6 @@ public class GUI extends javax.swing.JFrame {
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 buttons_entered(evt);
-            }
-        });
-        tool_shape.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tool_shapeActionPerformed(evt);
             }
         });
 
@@ -820,10 +814,12 @@ public class GUI extends javax.swing.JFrame {
 
     private void drawAreaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_drawAreaMouseReleased
         drawEnd = drawArea.getMousePosition();
-        if (TargetShape == null) {
-            return;
+        if (TargetTool == "Drawing" && TargetShape != null) {
+            Drawer drawer = new Drawer(canvas, TargetShape, drawStart, drawEnd,CurrentColor);
+        }else if(TargetTool == "Selecting"){
+            
         }
-        Drawer drawer = new Drawer(canvas, TargetShape, drawStart, drawEnd);
+        
     }//GEN-LAST:event_drawAreaMouseReleased
 
     private void buttons_entered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons_entered
@@ -877,10 +873,6 @@ public class GUI extends javax.swing.JFrame {
         TargetShape = "Ellipse";
     }//GEN-LAST:event_shape_ovalActionPerformed
 
-    private void tool_shapeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tool_shapeActionPerformed
-        
-    }//GEN-LAST:event_tool_shapeActionPerformed
-
     private void MenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuMouseClicked
         if (menubarPane.isVisible() == true) {
             menubarPane.setVisible(false);
@@ -904,6 +896,7 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_tool_paintMouseClicked
 
     private void tool_shapeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tool_shapeMouseClicked
+        TargetTool = "Drawing";
         if (shapesPane.isVisible() == true) {
             shapesPane.setVisible(false);
         } else {
@@ -912,6 +905,10 @@ public class GUI extends javax.swing.JFrame {
             colorPanel.setVisible(false);
         }
     }//GEN-LAST:event_tool_shapeMouseClicked
+
+    private void tool_cursorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tool_cursorMouseClicked
+        TargetTool = "Selecting";
+    }//GEN-LAST:event_tool_cursorMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Menu;

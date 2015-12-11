@@ -3,6 +3,7 @@ package models.shapes;
 import Models.Layers.Layer;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.Point2D;
 
 public abstract class Shape {
 
@@ -118,6 +119,6 @@ public abstract class Shape {
         this.fill = fill;
     }
     
-    
+    public abstract boolean contains(Point2D Point);
 
 }
