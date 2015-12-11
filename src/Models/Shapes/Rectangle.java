@@ -8,8 +8,8 @@ import java.awt.geom.Rectangle2D;
 
 public class Rectangle extends Polygon {
 
-    private double width;
-    private double height;
+    protected double width;
+    protected double height;
     
     private double x;
     private double y;

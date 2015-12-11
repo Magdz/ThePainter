@@ -7,7 +7,7 @@ import java.awt.Point;
 import javax.swing.JButton;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import models.shapes.Rectangle;
+import models.shapes.*;
 
 
 
@@ -20,6 +20,7 @@ public class GUI extends javax.swing.JFrame {
     Canvas canvas;
     Point drawStart, drawEnd;
     String TargetShape = null;
+    Color CurrentColor = null;
     
     /**
      * Creates new form GUI
@@ -369,12 +370,6 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        shapesPane.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttons_entered(evt);
-            }
-        });
-
         shape_oval.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Assets/Ellipse-15 (1).png"))); // NOI18N
         shape_oval.setContentAreaFilled(false);
         shape_oval.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -389,6 +384,11 @@ public class GUI extends javax.swing.JFrame {
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 buttons_entered(evt);
+            }
+        });
+        shape_oval.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                shape_ovalActionPerformed(evt);
             }
         });
 
@@ -406,6 +406,11 @@ public class GUI extends javax.swing.JFrame {
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 buttons_entered(evt);
+            }
+        });
+        shape_circle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                shape_circleActionPerformed(evt);
             }
         });
 
@@ -446,6 +451,11 @@ public class GUI extends javax.swing.JFrame {
                 buttons_entered(evt);
             }
         });
+        shape_square.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                shape_squareActionPerformed(evt);
+            }
+        });
 
         shape_line.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Assets/Horizontal Line Filled-15.png"))); // NOI18N
         shape_line.setContentAreaFilled(false);
@@ -481,6 +491,11 @@ public class GUI extends javax.swing.JFrame {
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 buttons_entered(evt);
+            }
+        });
+        shape_tri.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                shape_triActionPerformed(evt);
             }
         });
 
@@ -802,7 +817,14 @@ public class GUI extends javax.swing.JFrame {
             case "Rectangle":
                 canvas.addShape(new Rectangle(drawStart.x,drawStart.y,drawEnd.x,drawEnd.y,Color.BLACK));
                 break;
+            case "Square":
+                canvas.addShape(new Square(drawStart.x,drawStart.y,drawEnd.x,drawEnd.y, Color.YELLOW));
+                break;
+            case "Ellipse":
+                canvas.addShape(new Elipse(Color.RED,1,Color.RED,1,Math.min(drawStart.x, drawEnd.x),Math.min(drawStart.y, drawEnd.y), Math.abs(drawStart.y-drawEnd.y), Math.abs((drawStart.x-drawEnd.x))));
+                break;
             case "Circle":
+                canvas.addShape(new Circle(Color.RED,1,Color.RED,1,Math.min(drawStart.x, drawEnd.x),Math.min(drawStart.y, drawEnd.y), Math.abs((drawStart.x-drawEnd.x)/2)));
                 break;
         }
     }//GEN-LAST:event_drawAreaMouseReleased
@@ -818,6 +840,22 @@ public class GUI extends javax.swing.JFrame {
             shapesPane.setVisible(true);
         }
     }//GEN-LAST:event_tool_shapeActionPerformed
+
+    private void shape_squareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shape_squareActionPerformed
+        TargetShape = "Square";
+    }//GEN-LAST:event_shape_squareActionPerformed
+
+    private void shape_circleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shape_circleActionPerformed
+        TargetShape = "Circle";
+    }//GEN-LAST:event_shape_circleActionPerformed
+
+    private void shape_ovalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shape_ovalActionPerformed
+        TargetShape = "Ellipse";
+    }//GEN-LAST:event_shape_ovalActionPerformed
+
+    private void shape_triActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shape_triActionPerformed
+        TargetShape = "Triangle";
+    }//GEN-LAST:event_shape_triActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Menu;
