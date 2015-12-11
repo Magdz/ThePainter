@@ -33,14 +33,13 @@ public class Line extends Shape {
 	@Override
 	public void Draw(Graphics2D g) {
 		
-		//Specifying rendering quality 
-		 g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);	 
-		 g.setStroke(new BasicStroke((float) stThickness));
-		 g.setColor(color);
-                 g.draw(new Line2D.Double(x,x1,y,y1));
+            //Specifying rendering quality 
+             g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);	 
+             g.setStroke(new BasicStroke((float) stThickness));
+             g.setColor(color);
+             g.draw(new Line2D.Double(x,y,x1,y1));
 
-		 
-	}
+        }
 
     public double getX1() {
         return x1;

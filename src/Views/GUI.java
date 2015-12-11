@@ -476,6 +476,11 @@ public class GUI extends javax.swing.JFrame {
                 buttons_entered(evt);
             }
         });
+        shape_line.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                shape_lineActionPerformed(evt);
+            }
+        });
 
         shape_tri.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Assets/Triangle-15.png"))); // NOI18N
         shape_tri.setContentAreaFilled(false);
@@ -821,10 +826,13 @@ public class GUI extends javax.swing.JFrame {
                 canvas.addShape(new Square(drawStart.x,drawStart.y,drawEnd.x,drawEnd.y, Color.YELLOW));
                 break;
             case "Ellipse":
-                canvas.addShape(new Elipse(Color.RED,1,Color.RED,1,Math.min(drawStart.x, drawEnd.x),Math.min(drawStart.y, drawEnd.y), Math.abs(drawStart.y-drawEnd.y), Math.abs((drawStart.x-drawEnd.x))));
+                canvas.addShape(new Elipse(Color.RED,Color.RED,1,Math.min(drawStart.x, drawEnd.x),Math.min(drawStart.y, drawEnd.y), Math.abs(drawStart.y-drawEnd.y), Math.abs((drawStart.x-drawEnd.x))));
                 break;
             case "Circle":
-                canvas.addShape(new Circle(Color.RED,1,Color.RED,1,Math.min(drawStart.x, drawEnd.x),Math.min(drawStart.y, drawEnd.y), Math.abs((drawStart.x-drawEnd.x)/2)));
+                canvas.addShape(new Circle(Color.RED,Color.RED,1,Math.min(drawStart.x, drawEnd.x),Math.min(drawStart.y, drawEnd.y), Math.abs((drawStart.x-drawEnd.x)/2)));
+                break;
+            case "Line":
+                canvas.addShape(new Line(Color.CYAN,Color.CYAN,5,drawStart.x,drawEnd.x,drawStart.y,drawEnd.y));
                 break;
         }
     }//GEN-LAST:event_drawAreaMouseReleased
@@ -856,6 +864,10 @@ public class GUI extends javax.swing.JFrame {
     private void shape_triActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shape_triActionPerformed
         TargetShape = "Triangle";
     }//GEN-LAST:event_shape_triActionPerformed
+
+    private void shape_lineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shape_lineActionPerformed
+        TargetShape = "Line";
+    }//GEN-LAST:event_shape_lineActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Menu;
