@@ -811,15 +811,18 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void drawAreaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_drawAreaMousePressed
+        shapesPane.setVisible(false);
         drawStart = drawArea.getMousePosition();
     }//GEN-LAST:event_drawAreaMousePressed
 
     private void drawAreaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_drawAreaMouseReleased
+        
         drawEnd = drawArea.getMousePosition();
         if (TargetTool == "Drawing" && TargetShape != null) {
             CurrentColor = colorchooser.getColor();
             Drawer drawer = new Drawer(canvas, TargetShape, drawStart, drawEnd,CurrentColor);
         }else if(TargetTool == "Selecting"){
+            canvas.unselectAll();
             Shape shape = canvas.getShape(drawStart);
             shape.select();
             repaint();

@@ -56,4 +56,10 @@ public class Canvas extends JPanel{
         }
         return null;
     }
+    
+    public void unselectAll(){
+        shapes.stream().forEach((shape) -> {
+            shape.setSelected(false);
+        });
+    }
 }

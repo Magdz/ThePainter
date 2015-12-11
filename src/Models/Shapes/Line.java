@@ -49,6 +49,11 @@ public class Line extends Shape {
     public void setY1(double y1) {
         this.y1 = y1;
     }
+
+    @Override
+    public boolean contains(Point2D Point) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
         
         
 
