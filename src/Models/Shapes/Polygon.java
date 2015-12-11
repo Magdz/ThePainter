@@ -16,9 +16,10 @@ public class Polygon extends Shape {
         //sides = array.length
 	public Polygon(Color color, Color stColor,
 			double stThickness, double firstPointX, double firstPointY ,int sides) { // need to call setPoints to set x y points of the polygon
-		super(color, stColor, stThickness,firstPointX,firstPointY);
-		this.sides=sides;
-               
+            super(color, stColor, stThickness,firstPointX,firstPointY);
+            this.sides=sides;
+            xPoints = new int[sides];
+            yPoints = new int[sides];
 	}
 
 	@Override
@@ -39,10 +40,10 @@ public class Polygon extends Shape {
         {
             xPoints[0]=(int)x;
             yPoints[0]=(int)y;
-            for(int i=1; i< sides; i++)
+            for(int i=1; i<sides; i++)
             {
-                xPoints[i]=xArr[i];
-                yPoints[i]=yArr[i];
+                xPoints[i]=xArr[i-1];
+                yPoints[i]=yArr[i-1];
             }
         }
 	

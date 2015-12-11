@@ -819,6 +819,17 @@ public class GUI extends javax.swing.JFrame {
         drawEnd = drawArea.getMousePosition();
         if(TargetShape == null)return;
         switch (TargetShape) {
+            case "Triangle":
+                Triangle Triangle = new Triangle(Color.GRAY,Color.GRAY,5,drawStart.x,drawStart.y);
+                int[] xPoints = new int[2];
+                xPoints[0] = ((drawStart.x+drawEnd.x)/2)+50;
+                xPoints[1] = drawEnd.x;
+                int[] yPoints = new int[2];
+                yPoints[0] = ((drawStart.y+drawEnd.y)/2)+50;
+                yPoints[1] = drawEnd.y;
+                Triangle.setPoints(xPoints, yPoints);
+                canvas.addShape(Triangle);
+                break;
             case "Rectangle":
                 canvas.addShape(new Rectangle(drawStart.x,drawStart.y,drawEnd.x,drawEnd.y,Color.BLACK));
                 break;
