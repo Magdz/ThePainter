@@ -3,9 +3,11 @@ package Views;
 import Models.Layers.Canvas;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Point;
 import javax.swing.JButton;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import models.shapes.Rectangle;
 
 
 
@@ -15,8 +17,10 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class GUI extends javax.swing.JFrame {
 
-    Canvas canvas = new Canvas();
-
+    Canvas canvas;
+    Point drawStart, drawEnd;
+    String TargetShape = null;
+    
     /**
      * Creates new form GUI
      */
@@ -24,10 +28,10 @@ public class GUI extends javax.swing.JFrame {
         Theme();
         initComponents();
         
-        canvas.setSize(400, 400);
         menubarPane.setVisible(false);
         shapesPane.setVisible(false);
-        drawArea.setBackground(Color.white);
+        canvas = new Canvas();
+        canvas.setSize(drawArea.getSize());
         drawArea.add(canvas);
         
         Container layerContainer = new Container();
@@ -37,7 +41,6 @@ public class GUI extends javax.swing.JFrame {
         
         LayerStyle layer = new LayerStyle(layerContainer);
         layer.addComp("Layer 1", layerContainer);
-        
     }
 
     private void Theme() {
@@ -118,6 +121,14 @@ public class GUI extends javax.swing.JFrame {
         jTabbedPane2.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
 
         drawArea.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        drawArea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                drawAreaMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                drawAreaMouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout drawAreaLayout = new javax.swing.GroupLayout(drawArea);
         drawArea.setLayout(drawAreaLayout);
@@ -352,6 +363,11 @@ public class GUI extends javax.swing.JFrame {
                 buttons_entered(evt);
             }
         });
+        tool_shape.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tool_shapeActionPerformed(evt);
+            }
+        });
 
         shapesPane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -396,6 +412,9 @@ public class GUI extends javax.swing.JFrame {
         shape_rect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Assets/Rectangle Filled-15.png"))); // NOI18N
         shape_rect.setContentAreaFilled(false);
         shape_rect.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                shape_rectMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 buttons_entered(evt);
             }
@@ -414,6 +433,9 @@ public class GUI extends javax.swing.JFrame {
         shape_square.setToolTipText("");
         shape_square.setContentAreaFilled(false);
         shape_square.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                shape_squareMouseClicked(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 buttons_exited(evt);
             }
@@ -589,6 +611,9 @@ public class GUI extends javax.swing.JFrame {
         tool_stroke.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Assets/Pencil Sharpener-10.png"))); // NOI18N
         tool_stroke.setContentAreaFilled(false);
         tool_stroke.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tool_strokeMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 buttons_entered(evt);
             }
@@ -737,17 +762,26 @@ public class GUI extends javax.swing.JFrame {
         Style.EnteredReleased(TargetButton);
     }//GEN-LAST:event_buttons_entered
 
+    private void buttons_pressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons_pressed
+        JButton TargetButton = (JButton) evt.getSource();
+        ButtonStyle Style = new ButtonStyle(TargetButton);
+        Style.pressed(TargetButton);
+    }//GEN-LAST:event_buttons_pressed
+
     private void buttons_exited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons_exited
         JButton TargetButton = (JButton) evt.getSource();
         ButtonStyle Style = new ButtonStyle(TargetButton);
         Style.Exited(TargetButton);
     }//GEN-LAST:event_buttons_exited
 
-    private void buttons_pressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons_pressed
-        JButton TargetButton = (JButton) evt.getSource();
-        ButtonStyle Style = new ButtonStyle(TargetButton);
-        Style.pressed(TargetButton);
-    }//GEN-LAST:event_buttons_pressed
+    private void tool_strokeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tool_strokeMouseClicked
+        Canvas can = new Canvas();
+        System.out.println("Hi");
+    }//GEN-LAST:event_tool_strokeMouseClicked
+
+    private void shape_squareMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_shape_squareMouseClicked
+
+    }//GEN-LAST:event_shape_squareMouseClicked
 
     private void MenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuMouseClicked
         if (menubarPane.isVisible() == true) {
@@ -756,6 +790,34 @@ public class GUI extends javax.swing.JFrame {
             menubarPane.setVisible(true);
         }
     }//GEN-LAST:event_MenuMouseClicked
+
+    private void drawAreaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_drawAreaMousePressed
+        drawStart = drawArea.getMousePosition();
+    }//GEN-LAST:event_drawAreaMousePressed
+
+    private void drawAreaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_drawAreaMouseReleased
+        drawEnd = drawArea.getMousePosition();
+        if(TargetShape == null)return;
+        switch (TargetShape) {
+            case "Rectangle":
+                canvas.addShape(new Rectangle(drawStart.x,drawStart.y,drawEnd.x,drawEnd.y,Color.BLACK));
+                break;
+            case "Circle":
+                break;
+        }
+    }//GEN-LAST:event_drawAreaMouseReleased
+
+    private void shape_rectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_shape_rectMouseClicked
+        TargetShape = "Rectangle";
+    }//GEN-LAST:event_shape_rectMouseClicked
+
+    private void tool_shapeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tool_shapeActionPerformed
+        if (shapesPane.isVisible() == true) {
+            shapesPane.setVisible(false);
+        } else {
+            shapesPane.setVisible(true);
+        }
+    }//GEN-LAST:event_tool_shapeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Menu;

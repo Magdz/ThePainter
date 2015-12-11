@@ -5,58 +5,45 @@
  */
 package Models.Layers;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import javax.swing.JPanel;
+import models.shapes.Shape;
 
 /**
  *
  * @author Ahmed
  */
-public class Canvas extends JPanel implements MouseListener{
+public class Canvas extends JPanel{
     
     private final LinkedList Layers;
-    private Graphics g2d;
+    Point drawStart, drawEnd;
+    ArrayList<Shape> shapes = new ArrayList<>();
+    ArrayList<Color> shapeFill = new ArrayList<>();
+    ArrayList<Color> shapeStroke = new ArrayList<>();
     
     public Canvas(){
         this.Layers = new LinkedList<>();
-        this.addMouseListener(this);
-    }
-    
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponents(g);
-        super.setOpaque(true);
-        this.g2d = g;
-    }
-    
-    @Override
-    public void mouseClicked(MouseEvent me) {
-        System.out.println("Hi Click");
     }
 
     @Override
-    public void mousePressed(MouseEvent me) {
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent me) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent me) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent me) {
-    }
+    protected void paintComponent(Graphics g){
+        super.paintComponent(g);
+        setBackground(Color.white);
+        Graphics2D g2d = (Graphics2D)g;
+        shapes.stream().forEach((shape) -> {
+            shape.Draw(g2d);
+        });
+    }  
     
-    public void mouseDraged(MouseEvent me){
-    }
-    
-    public void add(Layer Layer){
-        this.Layers.add(Layer);
+    public void addShape(Shape Shape){
+        shapes.add(Shape);
+        repaint();
     }
 }

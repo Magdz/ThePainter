@@ -10,25 +10,24 @@ public class Rectangle extends Polygon {
 
     private double width;
     private double height;
-
-    public Rectangle(Color color, double length, Color stColor,
-            double stThickness, double x, double y, double width, double height) {
-        super(color, length, stColor, stThickness, x, y, 4);
-
-        this.width = width;
-        this.height = height;
+    
+    private double x;
+    private double y;
+    
+    public Rectangle(double x1, double y1, double x2, double y2, Color color) {
+        super(color,5,color,5,Math.min(x1,x2),Math.min(y1, y2),4);
+        this.x = Math.min(x1,x2);
+        this.y = Math.min(y1, y2);
+        this.height = Math.abs(y1-y2);
+        this.width = Math.abs(x1-x2);
     }
 
     @Override
     public void Draw(Graphics2D g) {
-
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setColor(color);
         g.setStroke(new BasicStroke((float) stThickness));
         g.draw(new Rectangle2D.Double(x, y, width, height));
-               
-
-
     }
 
     public double getHeight() {
