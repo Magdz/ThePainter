@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 public class Rectangle extends Polygon {
@@ -35,6 +36,13 @@ public class Rectangle extends Polygon {
         }
         else
             g.draw(new Rectangle2D.Double(x, y, width, height));
+        if(select){
+            final float dash1[] = {10.0f};
+            BasicStroke dashed = new BasicStroke(1.0f, BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER, 10.0f, dash1, 0.0f);
+            g.setColor(Color.CYAN);
+            g.setStroke(dashed);
+            g.draw(new Rectangle2D.Double(x-5, y-5, width+stThickness/2+10, height+stThickness/2+10));
+        }
     }
 
     public double getHeight() {
@@ -53,4 +61,9 @@ public class Rectangle extends Polygon {
         this.width = width;
     }
 
+    @Override
+    public boolean contains(Point2D Point) {
+        Rectangle2D.Double aDouble = new Rectangle2D.Double(x, y, width, height);
+        return aDouble.contains(Point);
+    }
 }
