@@ -40,6 +40,7 @@ public abstract class Shape {
     }
 
     public abstract void Draw(Graphics2D g);
+    public abstract void resize(int direction, Point newPoint);
     
     public Type getShapeType(){
         return this.ShapeType;

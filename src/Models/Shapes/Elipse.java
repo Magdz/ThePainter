@@ -52,8 +52,28 @@ public class Elipse extends Shape {
             g.draw(new Rectangle2D.Double(x-5, y-5, width+stThickness/2+10, height+stThickness/2+10));
         }
     }
-
-    
+    @Override
+    public void resize(int direction , Point newPoint)
+    {
+        switch(direction)
+        {
+            case ResizeDirections.right:
+                this.width=Math.abs(newPoint.x - x);           
+                break;
+            case ResizeDirections.left:
+                x=newPoint.x;
+                this.width=width+Math.abs(x-newPoint.x);
+                break;
+            case ResizeDirections.up:
+                y=newPoint.y;
+                this.height=height+Math.abs(y-newPoint.y);
+                break;
+            case ResizeDirections.down:
+                this.height=Math.abs(y-newPoint.y);
+                break;                   
+        }   
+    }
+  
     public double getHeight() {
         return height;
     }

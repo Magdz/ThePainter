@@ -39,6 +39,20 @@ public class Line extends Shape {
             g.draw(new Rectangle2D.Double(x-5, y-5, Math.abs(x-x1), Math.abs(y-y1)));
         }
     }
+    
+    @Override
+     public void resize(int direction , Point newPoint)  //right left only
+    {
+        switch(direction)
+        {
+            case ResizeDirections.right:
+                x1=newPoint.x;          
+                break;
+            case ResizeDirections.left:
+                x=newPoint.x;
+                break;
+        }
+    }
 
     public double getX1() {
         return x1;
