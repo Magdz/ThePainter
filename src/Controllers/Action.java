@@ -16,4 +16,7 @@ public abstract class Action<Model>{
         
     }
     
+    public abstract void Reverse();
+    public abstract void Do();
+    
 }

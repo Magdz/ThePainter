@@ -22,6 +22,7 @@ public class GUI extends javax.swing.JFrame {
     String TargetTool = null;
     String TargetShape = null;
     Color CurrentColor = Color.BLACK;
+    UndoRedo UndoRedo;
 
     /**
      * Creates new form GUI
@@ -48,6 +49,8 @@ public class GUI extends javax.swing.JFrame {
         colorchooser = new ColorChooser();
         colorchooser.setSize(colorPanel.getSize());
         colorPanel.add(colorchooser);
+        
+        UndoRedo = new UndoRedo();
     }
 
     private void Theme() {
@@ -596,6 +599,11 @@ public class GUI extends javax.swing.JFrame {
                 buttons_entered(evt);
             }
         });
+        tool_undo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tool_undoActionPerformed(evt);
+            }
+        });
 
         tool_redo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Assets/Redo.png"))); // NOI18N
         tool_redo.setContentAreaFilled(false);
@@ -611,6 +619,11 @@ public class GUI extends javax.swing.JFrame {
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 buttons_entered(evt);
+            }
+        });
+        tool_redo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tool_redoActionPerformed(evt);
             }
         });
 
@@ -828,6 +841,7 @@ public class GUI extends javax.swing.JFrame {
         if (TargetTool == "Drawing" && TargetShape != null) {
             CurrentColor = colorchooser.getColor();
             Drawer drawer = new Drawer(canvas, TargetShape, drawStart, drawEnd,CurrentColor);
+            this.UndoRedo.addUndo(drawer);
         }else if(TargetTool == "Selecting"){
             canvas.unselectAll();
             Shape shape = canvas.getShape(drawStart);
@@ -836,6 +850,7 @@ public class GUI extends javax.swing.JFrame {
             repaint();
         }else if(TargetTool == "Deleting"){
             Deleter deleter = new Deleter(canvas,drawStart);
+            if(deleter.getFlag())this.UndoRedo.addUndo(deleter);
         }
         
     }//GEN-LAST:event_drawAreaMouseReleased
@@ -931,6 +946,14 @@ public class GUI extends javax.swing.JFrame {
     private void tool_eraserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tool_eraserActionPerformed
         TargetTool = "Deleting";
     }//GEN-LAST:event_tool_eraserActionPerformed
+
+    private void tool_undoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tool_undoActionPerformed
+        this.UndoRedo.Undo();
+    }//GEN-LAST:event_tool_undoActionPerformed
+
+    private void tool_redoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tool_redoActionPerformed
+        this.UndoRedo.Redo();
+    }//GEN-LAST:event_tool_redoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Menu;

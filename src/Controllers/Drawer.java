@@ -61,5 +61,16 @@ public class Drawer extends Action {
                 break;
         }
     }
+
+    
+    @Override
+    public void Reverse() {
+        System.out.println("Reverse Drawer");
+    }
+
+    @Override
+    public void Do() {
+        System.out.println("Do Drawer");
+    }
     
 }

@@ -35,4 +35,18 @@ public class Deleter extends Action{
         }
     }
     
+    public boolean getFlag(){
+        return this.DeleteFlag;
+    }
+
+    @Override
+    public void Reverse() {
+        System.out.println("Reverse Deleter");
+    }
+
+    @Override
+    public void Do() {
+        System.out.println("Do Deleter");
+    }
+    
 }
