@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.*;
 import java.awt.BasicStroke;
+import java.awt.Point;
 
 
 public class Line extends Shape {
@@ -59,6 +60,16 @@ public class Line extends Shape {
     public boolean contains(Point2D Point) {
         Line2D.Double aDouble = new Line2D.Double(x, y, x1, y1);
         return aDouble.contains(Point);
+    }
+
+    @Override
+    public Point getStart() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Point getEnd() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

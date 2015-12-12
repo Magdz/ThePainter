@@ -65,12 +65,18 @@ public class Drawer extends Action {
     
     @Override
     public void Reverse() {
-        System.out.println("Reverse Drawer");
+        try{
+            Point Center = new Point((drawStart.x+drawEnd.x)/2,(drawStart.y+drawEnd.y)/2);
+            Deleter deleter = new Deleter(this.canvas,Center);
+            deleter.forceDelete();
+        }catch(Exception e){
+            
+        }
     }
 
     @Override
     public void Do() {
-        System.out.println("Do Drawer");
+        Draw();
     }
     
 }

@@ -3,17 +3,16 @@ package models.shapes;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import static oracle.jrockit.jfr.events.Bits.intValue;
 
 public class Rectangle extends Polygon {
 
     protected double width;
     protected double height;
-    
-    private double x;
-    private double y;
     
     public Rectangle(double x1, double y1, double x2, double y2, Color color) {
         super(color,color,5,Math.min(x1,x2),Math.min(y1, y2),4);
@@ -21,6 +20,9 @@ public class Rectangle extends Polygon {
         this.y = Math.min(y1, y2);
         this.height = Math.abs(y1-y2);
         this.width = Math.abs(x1-x2);
+        this.ShapeType = Type.Rectangle;
+        this.Start = new Point(intValue(x1), intValue(y1));
+        this.End = new Point(intValue(x2), intValue(y2));
     }
 
     @Override
@@ -65,5 +67,15 @@ public class Rectangle extends Polygon {
     public boolean contains(Point2D Point) {
         Rectangle2D.Double aDouble = new Rectangle2D.Double(x, y, width, height);
         return aDouble.contains(Point);
+    }
+    
+    @Override
+    public Point getStart(){
+        return this.Start;
+    }
+    
+    @Override
+    public Point getEnd(){
+        return this.End;
     }
 }

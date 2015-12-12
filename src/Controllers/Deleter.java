@@ -13,12 +13,21 @@ import models.shapes.Shape;
  *
  * @author Ahmed
  */
-public class Deleter extends Action{
+public final class Deleter extends Action{
 
     private static boolean DeleteFlag = false;
+    private final Canvas canvas;
+    private final Point Point;
+    private Shape shape;
     
     public Deleter(Canvas canvas, Point Point) {
-        Shape shape = canvas.getShape(Point);
+        this.canvas = canvas;
+        this.Point = Point;
+        this.shape = canvas.getShape(Point);
+        Delete();
+    }
+    
+    public void Delete(){
         if(DeleteFlag){
             if(shape.isSelected()){
                 canvas.delete(shape);
@@ -35,18 +44,23 @@ public class Deleter extends Action{
         }
     }
     
+    public void forceDelete(){
+        canvas.delete(shape);
+    }
+    
     public boolean getFlag(){
         return this.DeleteFlag;
     }
 
     @Override
     public void Reverse() {
-        System.out.println("Reverse Deleter");
+        Drawer drawer = new Drawer(canvas,shape.getShapeType().toString(), shape.getStart(), shape.getEnd(), shape.getColor());
+        canvas.addShape(shape);
     }
 
     @Override
     public void Do() {
-        System.out.println("Do Deleter");
+        canvas.delete(shape);
     }
     
 }

@@ -3,9 +3,18 @@ package models.shapes;
 import Models.Layers.Layer;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.geom.Point2D;
 
 public abstract class Shape {
+    
+    public enum Type{
+        Rectangle,Square,Circle,Elipse,Triangle,Polygon,Line;
+    }
+    
+    protected Type ShapeType;
+    protected Point Start;
+    protected Point End;
 
     protected Color color;
    // protected double length;
@@ -31,6 +40,10 @@ public abstract class Shape {
     }
 
     public abstract void Draw(Graphics2D g);
+    
+    public Type getShapeType(){
+        return this.ShapeType;
+    }
 
     public void setSelected(boolean selected) {
         this.select = selected;
@@ -43,8 +56,6 @@ public abstract class Shape {
     public Color getColor() {
         return color;
     }
-
-  
 
     public Color getStColor() {
         return stColor;
@@ -70,8 +81,6 @@ public abstract class Shape {
         this.color = color;
     }
 
-   
-
     public void setStColor(Color stColor) {
         this.stColor = stColor;
     }
@@ -91,7 +100,6 @@ public abstract class Shape {
     public void setLayer(Layer layer) {
         Layer = layer;
     }
-
    
 
     public Boolean isSelected() {
@@ -119,5 +127,7 @@ public abstract class Shape {
     }
     
     public abstract boolean contains(Point2D Point);
-
+    public abstract Point getStart();
+    public abstract Point getEnd();
+    
 }

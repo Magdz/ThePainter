@@ -3,10 +3,12 @@ package models.shapes;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import static oracle.jrockit.jfr.events.Bits.intValue;
 
 public class Elipse extends Shape {
 
@@ -20,7 +22,8 @@ public class Elipse extends Shape {
         //   this.radius = radius;
         this.height = height;
         this.width = width;
-
+        this.Start = new Point(intValue(x), intValue(y));
+        this.End = new Point(intValue(x+width), intValue(y+height));
     }
 
     @Override
@@ -71,6 +74,16 @@ public class Elipse extends Shape {
     public boolean contains(Point2D Point) {
         Ellipse2D.Double aDouble = new Ellipse2D.Double(x, y, width, height);
         return aDouble.contains(Point);
+    }
+
+    @Override
+    public Point getStart() {
+        return this.Start;
+    }
+
+    @Override
+    public Point getEnd() {
+        return this.End;
     }
 
 }
