@@ -851,6 +851,7 @@ public class GUI extends javax.swing.JFrame {
         drawEnd = drawArea.getMousePosition();
         if (TargetTool == "Drawing" && TargetShape != null) {
             CurrentColor = colorchooser.getColor();
+            if(drawStart.x == drawEnd.x && drawStart.y == drawEnd.y)return;
             Drawer drawer = new Drawer(canvas, TargetShape, drawStart, drawEnd,CurrentColor);
             this.UndoRedo.addUndo(drawer);
         }else if(TargetTool == "Selecting"){
@@ -865,6 +866,10 @@ public class GUI extends javax.swing.JFrame {
         }else if(TargetTool == "Filling"){
             Filler filler = new Filler(canvas,drawStart,colorchooser.getColor());
             this.UndoRedo.addUndo(filler);
+        }else if(TargetTool == "Resizing"){
+            Shape shape = canvas.getShape(drawStart);
+            if(shape  == null)return;
+            
         }
         
     }//GEN-LAST:event_drawAreaMouseReleased
