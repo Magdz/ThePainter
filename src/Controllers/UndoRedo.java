@@ -23,6 +23,7 @@ public class UndoRedo {
     
     public void addUndo(Action action){
         Undo.push(action);
+        Redo.removeAllElements();
     }
     
     private void addRedo(Action action){
