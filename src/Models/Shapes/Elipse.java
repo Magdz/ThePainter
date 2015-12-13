@@ -61,12 +61,12 @@ public class Elipse extends Shape {
                 this.width=Math.abs(newPoint.x - x);           
                 break;
             case left:
+                this.width=width+Math.abs(newPoint.x - x);
                 x=newPoint.x;
-                this.width=width+Math.abs(x-newPoint.x);
                 break;
             case up:
-                y=newPoint.y;
                 this.height=height+Math.abs(y-newPoint.y);
+                y=newPoint.y;
                 break;
             case down:
                 this.height=Math.abs(y-newPoint.y);

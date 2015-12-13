@@ -705,6 +705,20 @@ public class GUI extends javax.swing.JFrame {
 
         tool_resize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Assets/Crop-15.png"))); // NOI18N
         tool_resize.setContentAreaFilled(false);
+        tool_resize.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttons_entered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttons_exited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                buttons_pressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                buttons_entered(evt);
+            }
+        });
         tool_resize.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tool_resizeActionPerformed(evt);
@@ -867,9 +881,8 @@ public class GUI extends javax.swing.JFrame {
             Filler filler = new Filler(canvas,drawStart,colorchooser.getColor());
             this.UndoRedo.addUndo(filler);
         }else if(TargetTool == "Resizing"){
-            Shape shape = canvas.getShape(drawStart);
-            if(shape  == null)return;
-            
+            Resizer resizer = new Resizer(canvas,drawStart,drawEnd);
+            this.UndoRedo.addUndo(resizer);
         }
         
     }//GEN-LAST:event_drawAreaMouseReleased

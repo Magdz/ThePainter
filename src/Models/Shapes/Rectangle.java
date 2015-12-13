@@ -57,15 +57,15 @@ public class Rectangle extends Polygon {
                 this.width=Math.abs(newPoint.x - x);           
                 break;
             case left:
+                this.width=width+Math.abs(newPoint.x - x);
                 x=newPoint.x;
-                this.width=width+Math.abs(x-newPoint.x);
                 break;
             case up:
-                this.height=Math.abs(y-newPoint.y);
+                this.height=height+Math.abs(y-newPoint.y);
+                y=newPoint.y;
                 break;
             case down:
-                y=newPoint.y;
-                this.height=height+Math.abs(y-newPoint.y);
+                this.height=Math.abs(y-newPoint.y);
                 break;                   
         }              
     }
