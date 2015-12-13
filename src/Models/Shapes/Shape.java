@@ -12,6 +12,10 @@ public abstract class Shape {
         Rectangle,Square,Circle,Elipse,Triangle,Polygon,Line;
     }
     
+    public enum ResizeDirections{
+        up,down,left,right
+    }
+    
     protected Type ShapeType;
     protected Point Start;
     protected Point End;
@@ -40,7 +44,7 @@ public abstract class Shape {
     }
 
     public abstract void Draw(Graphics2D g);
-    public abstract void resize(int direction, Point newPoint);
+    public abstract void resize(ResizeDirections direction, Point newPoint);
     
     public Type getShapeType(){
         return this.ShapeType;

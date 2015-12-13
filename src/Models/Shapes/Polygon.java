@@ -71,10 +71,7 @@ public class Polygon extends Shape {
     }
 
     @Override
-    public void resize(int direction, Point newPoint) {
+    public void resize(ResizeDirections direction, Point newPoint) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-	
-	
-
 }

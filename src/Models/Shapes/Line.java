@@ -41,14 +41,14 @@ public class Line extends Shape {
     }
     
     @Override
-     public void resize(int direction , Point newPoint)  //right left only
+     public void resize(ResizeDirections direction , Point newPoint)  //right left only
     {
         switch(direction)
         {
-            case ResizeDirections.right:
+            case right:
                 x1=newPoint.x;          
                 break;
-            case ResizeDirections.left:
+            case left:
                 x=newPoint.x;
                 break;
         }

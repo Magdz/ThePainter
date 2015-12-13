@@ -53,22 +53,22 @@ public class Elipse extends Shape {
         }
     }
     @Override
-    public void resize(int direction , Point newPoint)
+    public void resize(ResizeDirections direction , Point newPoint)
     {
         switch(direction)
         {
-            case ResizeDirections.right:
+            case right:
                 this.width=Math.abs(newPoint.x - x);           
                 break;
-            case ResizeDirections.left:
+            case left:
                 x=newPoint.x;
                 this.width=width+Math.abs(x-newPoint.x);
                 break;
-            case ResizeDirections.up:
+            case up:
                 y=newPoint.y;
                 this.height=height+Math.abs(y-newPoint.y);
                 break;
-            case ResizeDirections.down:
+            case down:
                 this.height=Math.abs(y-newPoint.y);
                 break;                   
         }   
