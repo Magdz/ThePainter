@@ -112,11 +112,12 @@ public class GUI extends javax.swing.JFrame {
         tool_shape = new javax.swing.JButton();
         tool_undo = new javax.swing.JButton();
         tool_redo = new javax.swing.JButton();
-        tool_resize = new javax.swing.JButton();
+        tool_move = new javax.swing.JButton();
         tool_rotate = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         tool_eraser = new javax.swing.JButton();
         tool_stroke = new javax.swing.JButton();
+        tool_resize = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         layerTabbed = new javax.swing.JTabbedPane();
         jPopupMenu1.getAccessibleContext().setAccessibleName("");
@@ -222,9 +223,6 @@ public class GUI extends javax.swing.JFrame {
         shape_square.setToolTipText("");
         shape_square.setContentAreaFilled(false);
         shape_square.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                shape_squareMouseClicked(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 buttons_exited(evt);
             }
@@ -524,6 +522,11 @@ public class GUI extends javax.swing.JFrame {
                 buttons_entered(evt);
             }
         });
+        tool_brush.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tool_brushActionPerformed(evt);
+            }
+        });
 
         tool_paint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Assets/Paint Bucket Filled-15.png"))); // NOI18N
         tool_paint.setContentAreaFilled(false);
@@ -627,9 +630,9 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        tool_resize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Assets/Resize Four Directions.png"))); // NOI18N
-        tool_resize.setContentAreaFilled(false);
-        tool_resize.addMouseListener(new java.awt.event.MouseAdapter() {
+        tool_move.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Assets/Resize Four Directions.png"))); // NOI18N
+        tool_move.setContentAreaFilled(false);
+        tool_move.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 buttons_entered(evt);
             }
@@ -686,9 +689,6 @@ public class GUI extends javax.swing.JFrame {
         tool_stroke.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Assets/Pencil Sharpener-10.png"))); // NOI18N
         tool_stroke.setContentAreaFilled(false);
         tool_stroke.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tool_strokeMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 buttons_entered(evt);
             }
@@ -703,6 +703,14 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        tool_resize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Assets/Crop-15.png"))); // NOI18N
+        tool_resize.setContentAreaFilled(false);
+        tool_resize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tool_resizeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -713,7 +721,7 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(tool_cursor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addComponent(tool_pencil, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addComponent(tool_rotate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(tool_resize, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(tool_move, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addComponent(tool_redo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addComponent(tool_undo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -721,7 +729,8 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(tool_brush, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tool_paint, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tool_crop, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jSeparator1))
+                        .addComponent(jSeparator1)
+                        .addComponent(tool_resize, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(tool_stroke, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -748,7 +757,7 @@ public class GUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(tool_redo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tool_resize)
+                                .addComponent(tool_move)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(tool_rotate))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -764,7 +773,9 @@ public class GUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(tool_paint)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tool_crop))))
+                                .addComponent(tool_crop)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tool_resize))
                     .addComponent(menubarPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -851,6 +862,9 @@ public class GUI extends javax.swing.JFrame {
         }else if(TargetTool == "Deleting"){
             Deleter deleter = new Deleter(canvas,drawStart);
             if(deleter.getFlag())this.UndoRedo.addUndo(deleter);
+        }else if(TargetTool == "Filling"){
+            Filler filler = new Filler(canvas,drawStart,colorchooser.getColor());
+            this.UndoRedo.addUndo(filler);
         }
         
     }//GEN-LAST:event_drawAreaMouseReleased
@@ -873,11 +887,6 @@ public class GUI extends javax.swing.JFrame {
         Style.Exited(TargetButton);
     }//GEN-LAST:event_buttons_exited
 
-    private void tool_strokeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tool_strokeMouseClicked
-        Canvas can = new Canvas();
-        System.out.println("Hi");
-    }//GEN-LAST:event_tool_strokeMouseClicked
-
     private void shape_triActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shape_triActionPerformed
         TargetShape = "Triangle";
     }//GEN-LAST:event_shape_triActionPerformed
@@ -889,10 +898,6 @@ public class GUI extends javax.swing.JFrame {
     private void shape_squareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shape_squareActionPerformed
         TargetShape = "Square";
     }//GEN-LAST:event_shape_squareActionPerformed
-
-    private void shape_squareMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_shape_squareMouseClicked
-
-    }//GEN-LAST:event_shape_squareMouseClicked
 
     private void shape_rectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_shape_rectMouseClicked
         TargetShape = "Rectangle";
@@ -955,6 +960,14 @@ public class GUI extends javax.swing.JFrame {
         this.UndoRedo.Redo();
     }//GEN-LAST:event_tool_redoActionPerformed
 
+    private void tool_brushActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tool_brushActionPerformed
+        TargetTool = "Filling";
+    }//GEN-LAST:event_tool_brushActionPerformed
+
+    private void tool_resizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tool_resizeActionPerformed
+        TargetTool = "Resizing";
+    }//GEN-LAST:event_tool_resizeActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Menu;
     private javax.swing.JPanel colorPanel;
@@ -982,6 +995,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton tool_crop;
     private javax.swing.JButton tool_cursor;
     private javax.swing.JButton tool_eraser;
+    private javax.swing.JButton tool_move;
     private javax.swing.JButton tool_paint;
     private javax.swing.JButton tool_pencil;
     private javax.swing.JButton tool_redo;

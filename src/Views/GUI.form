@@ -264,7 +264,6 @@
                         <Property name="contentAreaFilled" type="boolean" value="false"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="shape_squareMouseClicked"/>
                         <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buttons_exited"/>
                         <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buttons_pressed"/>
                         <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buttons_entered"/>
@@ -324,7 +323,7 @@
                               <Component id="tool_cursor" alignment="0" pref="0" max="32767" attributes="0"/>
                               <Component id="tool_pencil" alignment="0" pref="0" max="32767" attributes="0"/>
                               <Component id="tool_rotate" alignment="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="tool_resize" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="tool_move" alignment="0" pref="0" max="32767" attributes="0"/>
                               <Component id="tool_redo" alignment="0" pref="0" max="32767" attributes="0"/>
                               <Component id="tool_undo" alignment="0" pref="0" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -334,6 +333,7 @@
                                   <Component id="tool_crop" min="-2" pref="29" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jSeparator1" max="32767" attributes="0"/>
+                              <Component id="tool_resize" alignment="1" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Component id="Menu" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
@@ -365,7 +365,7 @@
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="tool_redo" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="tool_resize" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tool_move" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="tool_rotate" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -385,6 +385,8 @@
                                       <Component id="tool_crop" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="tool_resize" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="menubarPane" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -549,6 +551,7 @@
                 <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buttons_exited"/>
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buttons_pressed"/>
                 <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buttons_entered"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tool_brushActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="tool_paint">
@@ -626,7 +629,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tool_redoActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="tool_resize">
+            <Component class="javax.swing.JButton" name="tool_move">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Views/Assets/Resize Four Directions.png"/>
@@ -679,11 +682,21 @@
                 <Property name="contentAreaFilled" type="boolean" value="false"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tool_strokeMouseClicked"/>
                 <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buttons_entered"/>
                 <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buttons_exited"/>
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buttons_pressed"/>
                 <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buttons_entered"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="tool_resize">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Views/Assets/Crop-15.png"/>
+                </Property>
+                <Property name="contentAreaFilled" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tool_resizeActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
