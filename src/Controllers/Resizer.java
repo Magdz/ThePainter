@@ -18,10 +18,6 @@ public class Resizer extends Action{
     private final Canvas canvas;
     private Shape shape;
     private Shape.ResizeDirections ResizeDirection;
-    private double oldX;
-    private double oldY;
-    private double oldWidth;
-    private double oldHeigth;
     private final Point ResizeStart;
     private final Point ResizeEnd;
     
@@ -30,12 +26,12 @@ public class Resizer extends Action{
         this.ResizeStart = ResizeStart;
         this.ResizeEnd = ResizeEnd;
         this.shape = this.canvas.getShape(this.ResizeStart);
+        CalcDirection();
         Resize();
     }
     
     private void Resize(){
         if(shape  == null)return;
-        CalcDirection();
         shape.resize(this.ResizeDirection, ResizeEnd);
         canvas.repaint();
     }
@@ -58,5 +54,18 @@ public class Resizer extends Action{
             }
         }
         
+    }
+
+    @Override
+    public void Reverse() {
+        Deleter deleter = new Deleter(canvas,shape.getStart());
+        deleter.forceDelete();
+        Drawer drawer= new Drawer (canvas, shape.getShapeType().toString(), shape.getStart(), shape.getEnd(), shape.getColor());
+        this.shape = drawer.getShape();
+    }
+
+    @Override
+    public void Do() {
+        Resize();
     }
 }
