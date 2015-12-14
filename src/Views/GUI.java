@@ -346,6 +346,9 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        colorPanel.getAccessibleContext().setAccessibleParent(canvasTabbedPanel);
+        shapesPane.getAccessibleContext().setAccessibleParent(canvasTabbedPanel);
+
         canvasTabbedPanel.addTab("Untitled 1", drawArea);
 
         jPanel1.setBackground(new java.awt.Color(247, 247, 247));
@@ -851,7 +854,6 @@ public class GUI extends javax.swing.JFrame {
             Resizer resizer = new Resizer(canvas, drawStart, drawEnd);
             this.UndoRedo.addUndo(resizer);
         } else if (TargetTool == "Moving") {
-            Shape shape = canvas.getShape(drawStart);
             Move moving = new Move(canvas, drawStart, drawEnd);
             this.UndoRedo.addUndo(moving);
         }
@@ -867,6 +869,7 @@ public class GUI extends javax.swing.JFrame {
         JButton TargetButton = (JButton) evt.getSource();
         ButtonStyle Style = new ButtonStyle(TargetButton);
         Style.pressed(TargetButton);
+        colorPanel.setVisible(false);
     }//GEN-LAST:event_buttons_pressed
 
     private void buttons_exited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttons_exited
@@ -927,6 +930,7 @@ public class GUI extends javax.swing.JFrame {
             shapesPane.setVisible(false);
         } else {
             shapesPane.setVisible(true);
+            shapesPane.setFocusable(true);
             menubarPane.setVisible(false);
             colorPanel.setVisible(false);
         }
@@ -967,6 +971,7 @@ public class GUI extends javax.swing.JFrame {
         canvasTabbedPanel.addTab("Untitled" + (canvasTabbedPanel.getTabCount()+1), canvas2);
         canvasTabbedPanel.setSelectedIndex(canvasTabbedPanel.getTabCount() - 1);
         menubarPane.setVisible(false);
+        canvas2.add(shapesPane);
 
     }//GEN-LAST:event_menu_newActionPerformed
 
@@ -1005,7 +1010,4 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton tool_undo;
     // End of variables declaration//GEN-END:variables
 
-    private void setIcon() {
-
-    }
 }
