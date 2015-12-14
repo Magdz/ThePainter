@@ -22,6 +22,7 @@ public class Elipse extends Shape {
         //   this.radius = radius;
         this.height = height;
         this.width = width;
+        this.ShapeType = Type.Elipse;
         this.Start = new Point(intValue(x), intValue(y));
         this.End = new Point(intValue(x+width), intValue(y+height));
     }
