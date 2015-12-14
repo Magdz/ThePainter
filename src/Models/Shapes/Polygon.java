@@ -22,6 +22,7 @@ public class Polygon extends Shape {
         this.sides=sides;
         xPoints = new int[sides];
         yPoints = new int[sides];
+        this.ShapeType = Type.Polygon;
     }
 
     @Override

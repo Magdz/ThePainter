@@ -20,6 +20,7 @@ public class Line extends Shape {
 
         this.x1=x1;
         this.y1=y1;
+        this.ShapeType = Type.Line;
 
     }
 
