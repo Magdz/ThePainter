@@ -38,13 +38,13 @@ public class GUI extends javax.swing.JFrame {
         canvas.setSize(drawArea.getSize());
         drawArea.add(canvas);
 
-        Container layerContainer = new Container();
-        layerContainer.setName("Layers");
-        layerTabbed.add(layerContainer);
-        layerContainer.setBackground(Color.white);
+//        Container layerContainer = new Container();
+  //      layerContainer.setName("Layers");
+    //    layerTabbed.add(layerContainer);
+      //  layerContainer.setBackground(Color.white);
 
-        LayerStyle layer = new LayerStyle(layerContainer);
-        layer.addComp("Layer 1", layerContainer);
+        //LayerStyle layer = new LayerStyle(layerContainer);
+        //layer.addComp("Layer 1", layerContainer);
 
         colorchooser = new ColorChooser();
         colorchooser.setSize(colorPanel.getSize());
@@ -52,7 +52,6 @@ public class GUI extends javax.swing.JFrame {
         
         UndoRedo = new UndoRedo();
     }
-
     private void Theme() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -80,7 +79,6 @@ public class GUI extends javax.swing.JFrame {
 
         //</editor-fold>
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -118,8 +116,6 @@ public class GUI extends javax.swing.JFrame {
         tool_eraser = new javax.swing.JButton();
         tool_stroke = new javax.swing.JButton();
         tool_resize = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        layerTabbed = new javax.swing.JTabbedPane();
         jPopupMenu1.getAccessibleContext().setAccessibleName("");
         jPopupMenu1.getAccessibleContext().setAccessibleParent(Menu);
 
@@ -286,6 +282,13 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        shapesPane.setLayer(shape_oval, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_circle, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_rect, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_square, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_line, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_tri, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout shapesPaneLayout = new javax.swing.GroupLayout(shapesPane);
         shapesPane.setLayout(shapesPaneLayout);
         shapesPaneLayout.setHorizontalGroup(
@@ -320,12 +323,6 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(shape_line))
                     .addComponent(shape_tri)))
         );
-        shapesPane.setLayer(shape_oval, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_circle, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_rect, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_square, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_line, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_tri, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout drawAreaLayout = new javax.swing.GroupLayout(drawArea);
         drawArea.setLayout(drawAreaLayout);
@@ -344,7 +341,7 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(shapesPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, drawAreaLayout.createSequentialGroup()
-                .addContainerGap(212, Short.MAX_VALUE)
+                .addContainerGap(46, Short.MAX_VALUE)
                 .addComponent(colorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(176, 176, 176))
         );
@@ -442,6 +439,11 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        menubarPane.setLayer(menu_new, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        menubarPane.setLayer(menu_save, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        menubarPane.setLayer(menu_import, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        menubarPane.setLayer(menu_export, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout menubarPaneLayout = new javax.swing.GroupLayout(menubarPane);
         menubarPane.setLayout(menubarPaneLayout);
         menubarPaneLayout.setHorizontalGroup(
@@ -463,10 +465,6 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(menu_export, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(438, Short.MAX_VALUE))
         );
-        menubarPane.setLayer(menu_new, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        menubarPane.setLayer(menu_save, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        menubarPane.setLayer(menu_import, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        menubarPane.setLayer(menu_export, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         tool_cursor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Assets/Cursor-15.png"))); // NOI18N
         tool_cursor.setContentAreaFilled(false);
@@ -633,6 +631,9 @@ public class GUI extends javax.swing.JFrame {
         tool_move.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Assets/Resize Four Directions.png"))); // NOI18N
         tool_move.setContentAreaFilled(false);
         tool_move.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tool_moveMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 buttons_entered(evt);
             }
@@ -794,20 +795,6 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Preview"));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 249, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -815,33 +802,22 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 981, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(layerTabbed))
-                .addContainerGap())
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 981, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane2)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(layerTabbed, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(180, 180, 180))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -863,6 +839,7 @@ public class GUI extends javax.swing.JFrame {
     private void drawAreaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_drawAreaMouseReleased
         
         drawEnd = drawArea.getMousePosition();
+        
         if (TargetTool == "Drawing" && TargetShape != null) {
             CurrentColor = colorchooser.getColor();
             if(drawStart.x == drawEnd.x && drawStart.y == drawEnd.y)return;
@@ -883,6 +860,10 @@ public class GUI extends javax.swing.JFrame {
         }else if(TargetTool == "Resizing"){
             Resizer resizer = new Resizer(canvas,drawStart,drawEnd);
             this.UndoRedo.addUndo(resizer);
+        }else if(TargetTool == "Moving"){
+            Shape shape = canvas.getShape(drawStart);
+            Move moving = new Move(canvas,shape,drawStart,drawEnd);
+            repaint();
         }
         
     }//GEN-LAST:event_drawAreaMouseReleased
@@ -986,17 +967,19 @@ public class GUI extends javax.swing.JFrame {
         TargetTool = "Resizing";
     }//GEN-LAST:event_tool_resizeActionPerformed
 
+    private void tool_moveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tool_moveMouseClicked
+        TargetTool = "Moving";        // TODO add your handling code here:
+    }//GEN-LAST:event_tool_moveMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Menu;
     private javax.swing.JPanel colorPanel;
     private javax.swing.JPanel drawArea;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTabbedPane layerTabbed;
     private javax.swing.JButton menu_export;
     private javax.swing.JButton menu_import;
     private javax.swing.JButton menu_new;
@@ -1023,4 +1006,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton tool_stroke;
     private javax.swing.JButton tool_undo;
     // End of variables declaration//GEN-END:variables
+
+private void setIcon(){
+    
+}
 }
