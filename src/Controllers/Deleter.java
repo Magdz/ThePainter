@@ -7,7 +7,6 @@ package Controllers;
 
 import Models.Layers.Canvas;
 import java.awt.Point;
-import models.shapes.Shape;
 
 /**
  *
@@ -16,13 +15,9 @@ import models.shapes.Shape;
 public final class Deleter extends Action{
 
     private static boolean DeleteFlag = false;
-    private final Canvas canvas;
-    private final Point Point;
-    private final Shape shape;
     
     public Deleter(Canvas canvas, Point Point) {
         this.canvas = canvas;
-        this.Point = Point;
         this.shape = canvas.getShape(Point);
         Delete();
     }

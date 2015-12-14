@@ -5,16 +5,17 @@
  */
 package Controllers;
 
+import Models.Layers.Canvas;
+import models.shapes.Shape;
+
 /**
  *
  * @author Ahmed
- * @param <Model>
  */
-public abstract class Action<Model>{
+public abstract class Action{
     
-    public Action(){
-        
-    }
+    protected Canvas canvas;
+    protected Shape shape;
     
     public abstract void Reverse();
     public abstract void Do();

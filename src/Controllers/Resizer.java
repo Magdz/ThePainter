@@ -15,8 +15,6 @@ import models.shapes.Shape;
  */
 public class Resizer extends Action{
     
-    private final Canvas canvas;
-    private Shape shape;
     private Shape.ResizeDirections ResizeDirection;
     private final Point ResizeStart;
     private final Point ResizeEnd;

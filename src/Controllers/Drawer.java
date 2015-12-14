@@ -16,8 +16,6 @@ import models.shapes.*;
  */
 public class Drawer extends Action {
 
-    private final Canvas canvas;
-    private Shape shape;
     private final String ShapeType;
     private final Point drawStart;
     private final Point drawEnd;

@@ -16,8 +16,6 @@ import models.shapes.Shape.Type;
  */
 public class Move extends Action{
 
-    private final Canvas canvas;
-    private Shape shape;
     private String shapeType;
     private final Point MoveStart;
     private final Point MoveEnd;

@@ -8,7 +8,6 @@ package Controllers;
 import Models.Layers.Canvas;
 import java.awt.Color;
 import java.awt.Point;
-import models.shapes.Shape;
 
 /**
  *
@@ -16,15 +15,11 @@ import models.shapes.Shape;
  */
 public class Filler extends Action{
     
-    private final Canvas canvas;
-    private final Shape shape;
-    private final Point Point;
     private Color newColor;
     private Color oldColor;
     
     public Filler(Canvas canvas,Point Point,Color newColor){
         this.canvas = canvas;
-        this.Point = Point;
         this.newColor = newColor;
         this.shape = this.canvas.getShape(Point);
         Fill();
