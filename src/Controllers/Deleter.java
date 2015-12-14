@@ -18,7 +18,7 @@ public final class Deleter extends Action{
     private static boolean DeleteFlag = false;
     private final Canvas canvas;
     private final Point Point;
-    private Shape shape;
+    private final Shape shape;
     
     public Deleter(Canvas canvas, Point Point) {
         this.canvas = canvas;

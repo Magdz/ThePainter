@@ -17,6 +17,7 @@ import models.shapes.*;
 public class Drawer extends Action {
 
     private final Canvas canvas;
+    private Shape shape;
     private final String ShapeType;
     private final Point drawStart;
     private final Point drawEnd;
@@ -28,6 +29,7 @@ public class Drawer extends Action {
         this.drawStart = drawStart;
         this.drawEnd = drawEnd;
         this.Color = Color;
+        this.shape = null;
         Draw();
     }
     
@@ -42,26 +44,41 @@ public class Drawer extends Action {
                 yPoints[0] = ((drawStart.y+drawEnd.y)/2)+50;
                 yPoints[1] = drawEnd.y;
                 Triangle.setPoints(xPoints, yPoints);
+                this.shape = Triangle;
                 canvas.addShape(Triangle);
                 break;
             case "Rectangle":
-                canvas.addShape(new Rectangle(drawStart.x,drawStart.y,drawEnd.x,drawEnd.y,Color));
+                Rectangle Rectangle = new Rectangle(drawStart.x,drawStart.y,drawEnd.x,drawEnd.y,Color);
+                this.shape = Rectangle;
+                canvas.addShape(Rectangle);
                 break;
             case "Square":
-                canvas.addShape(new Square(drawStart.x,drawStart.y,drawEnd.x,drawEnd.y, Color));
+                Square Square = new Square(drawStart.x,drawStart.y,drawEnd.x,drawEnd.y, Color);
+                this.shape = Square;
+                canvas.addShape(Square);
                 break;
             case "Ellipse":
-                canvas.addShape(new Elipse(Color,Color,5,Math.min(drawStart.x, drawEnd.x),Math.min(drawStart.y, drawEnd.y), Math.abs(drawStart.y-drawEnd.y), Math.abs((drawStart.x-drawEnd.x))));
+                Elipse Ellipse =new Elipse(Color,Color,5,Math.min(drawStart.x, drawEnd.x),Math.min(drawStart.y, drawEnd.y), Math.abs(drawStart.y-drawEnd.y), Math.abs((drawStart.x-drawEnd.x))); 
+                this.shape = Ellipse;
+                canvas.addShape(Ellipse);
                 break;
             case "Circle":
-                canvas.addShape(new Circle(Color,Color,1,Math.min(drawStart.x, drawEnd.x),Math.min(drawStart.y, drawEnd.y), Math.abs((drawStart.x-drawEnd.x)/2)));
+                Circle Circle = new Circle(Color,Color,1,Math.min(drawStart.x, drawEnd.x),Math.min(drawStart.y, drawEnd.y), Math.abs((drawStart.x-drawEnd.x)/2));
+                this.shape = Circle;
+                canvas.addShape(Circle);
                 break;
             case "Line":
-                canvas.addShape(new Line(Color,Color,5,drawStart.x,drawEnd.x,drawStart.y,drawEnd.y));
+                Line Line = new Line(Color,Color,5,drawStart.x,drawEnd.x,drawStart.y,drawEnd.y);
+                this.shape = Line;
+                canvas.addShape(Line);
                 break;
         }
     }
-
+    
+    
+    public Shape getShape(){
+        return shape;
+    }
     
     @Override
     public void Reverse() {
