@@ -852,8 +852,8 @@ public class GUI extends javax.swing.JFrame {
             this.UndoRedo.addUndo(resizer);
         } else if (TargetTool == "Moving") {
             Shape shape = canvas.getShape(drawStart);
-            Move moving = new Move(canvas, shape, drawStart, drawEnd);
-            repaint();
+            Move moving = new Move(canvas, drawStart, drawEnd);
+            this.UndoRedo.addUndo(moving);
         }
     }//GEN-LAST:event_drawAreaMouseReleased
 
@@ -962,12 +962,9 @@ public class GUI extends javax.swing.JFrame {
 
     private void menu_newActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_newActionPerformed
         Canvas canvas2 = new Canvas();
-        JPanel drawingArea = new JPanel();
-        drawingArea.setSize(canvasTabbedPanel.getSize());
-        canvas2.setSize(400, 400);
-        drawingArea.add(canvas2);
-        canvasTabbedPanel.add(drawingArea);
-        canvasTabbedPanel.addTab("Untitled" + canvasTabbedPanel.getTabCount(), drawingArea);
+        canvas2.setSize(drawArea.getSize());
+        canvas2.setVisible(true);
+        canvasTabbedPanel.addTab("Untitled" + (canvasTabbedPanel.getTabCount()+1), canvas2);
         canvasTabbedPanel.setSelectedIndex(canvasTabbedPanel.getTabCount() - 1);
         menubarPane.setVisible(false);
 
