@@ -40,19 +40,18 @@ public class GUI extends javax.swing.JFrame {
         drawArea.add(canvas);
 
 //        Container layerContainer = new Container();
-  //      layerContainer.setName("Layers");
-    //    layerTabbed.add(layerContainer);
-      //  layerContainer.setBackground(Color.white);
-
+        //      layerContainer.setName("Layers");
+        //    layerTabbed.add(layerContainer);
+        //  layerContainer.setBackground(Color.white);
         //LayerStyle layer = new LayerStyle(layerContainer);
         //layer.addComp("Layer 1", layerContainer);
-
         colorchooser = new ColorChooser();
         colorchooser.setSize(colorPanel.getSize());
         colorPanel.add(colorchooser);
-        
+
         UndoRedo = new UndoRedo();
     }
+
     private void Theme() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -80,6 +79,7 @@ public class GUI extends javax.swing.JFrame {
 
         //</editor-fold>
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -821,32 +821,38 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_drawAreaMousePressed
 
     private void drawAreaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_drawAreaMouseReleased
-        
+
         drawEnd = drawArea.getMousePosition();
-        
+
         if (TargetTool == "Drawing" && TargetShape != null) {
             CurrentColor = colorchooser.getColor();
-            if(drawStart.x == drawEnd.x && drawStart.y == drawEnd.y)return;
-            Drawer drawer = new Drawer(canvas, TargetShape, drawStart, drawEnd,CurrentColor);
+            if (drawStart.x == drawEnd.x && drawStart.y == drawEnd.y) {
+                return;
+            }
+            Drawer drawer = new Drawer(canvas, TargetShape, drawStart, drawEnd, CurrentColor);
             this.UndoRedo.addUndo(drawer);
-        }else if(TargetTool == "Selecting"){
+        } else if (TargetTool == "Selecting") {
             canvas.unselectAll();
             Shape shape = canvas.getShape(drawStart);
-            if(shape == null)return;
+            if (shape == null) {
+                return;
+            }
             shape.select();
             repaint();
-        }else if(TargetTool == "Deleting"){
-            Deleter deleter = new Deleter(canvas,drawStart);
-            if(deleter.getFlag())this.UndoRedo.addUndo(deleter);
-        }else if(TargetTool == "Filling"){
-            Filler filler = new Filler(canvas,drawStart,colorchooser.getColor());
+        } else if (TargetTool == "Deleting") {
+            Deleter deleter = new Deleter(canvas, drawStart);
+            if (deleter.getFlag()) {
+                this.UndoRedo.addUndo(deleter);
+            }
+        } else if (TargetTool == "Filling") {
+            Filler filler = new Filler(canvas, drawStart, colorchooser.getColor());
             this.UndoRedo.addUndo(filler);
-        }else if(TargetTool == "Resizing"){
-            Resizer resizer = new Resizer(canvas,drawStart,drawEnd);
+        } else if (TargetTool == "Resizing") {
+            Resizer resizer = new Resizer(canvas, drawStart, drawEnd);
             this.UndoRedo.addUndo(resizer);
-        }else if(TargetTool == "Moving"){
+        } else if (TargetTool == "Moving") {
             Shape shape = canvas.getShape(drawStart);
-            Move moving = new Move(canvas,shape,drawStart,drawEnd);
+            Move moving = new Move(canvas, shape, drawStart, drawEnd);
             repaint();
         }
     }//GEN-LAST:event_drawAreaMouseReleased
@@ -958,13 +964,13 @@ public class GUI extends javax.swing.JFrame {
         Canvas canvas2 = new Canvas();
         JPanel drawingArea = new JPanel();
         drawingArea.setSize(canvasTabbedPanel.getSize());
-        canvas2.setSize(400,400);
+        canvas2.setSize(400, 400);
         drawingArea.add(canvas2);
         canvasTabbedPanel.add(drawingArea);
-        canvasTabbedPanel.addTab("Untitled"+canvasTabbedPanel.getTabCount(), drawingArea);
-        canvasTabbedPanel.setSelectedIndex(canvasTabbedPanel.getTabCount()-1);
+        canvasTabbedPanel.addTab("Untitled" + canvasTabbedPanel.getTabCount(), drawingArea);
+        canvasTabbedPanel.setSelectedIndex(canvasTabbedPanel.getTabCount() - 1);
         menubarPane.setVisible(false);
-        
+
     }//GEN-LAST:event_menu_newActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1002,7 +1008,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton tool_undo;
     // End of variables declaration//GEN-END:variables
 
-private void setIcon(){
-    
-}
+    private void setIcon() {
+
+    }
 }
