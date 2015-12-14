@@ -41,7 +41,8 @@ public class Move extends Action{
         this.shapeType = getType(shape);
         this.oldStart = shape.getStart();
         this.oldEnd = shape.getEnd();
-        canvas.delete(shape);
+        Deleter deleter = new Deleter(canvas,shape.getStart());
+        deleter.forceDelete();
         Drawer drawer = new Drawer(canvas, shapeType, newShapeStart, newShapeEnd, shape.getColor());
         this.shape = drawer.getShape();
         this.canvas.repaint();
@@ -70,9 +71,11 @@ public class Move extends Action{
 
     @Override
     public void Reverse() {
-        canvas.delete(shape);
+        Deleter deleter = new Deleter(canvas,shape.getStart());
+        deleter.forceDelete();
         Drawer drawer = new Drawer(canvas, shapeType, oldStart, oldEnd, shape.getColor());
         this.shape = drawer.getShape();
+        canvas.repaint();
     }
 
     @Override
