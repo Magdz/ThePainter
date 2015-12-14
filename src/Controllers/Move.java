@@ -14,24 +14,39 @@ import models.shapes.Shape.Type;
  *
  * @author dinan
  */
-public class Move {
+public class Move extends Action{
 
-    Canvas canvas;
-    Shape shape;
+    private final Canvas canvas;
+    private Shape shape;
+    private String shapeType;
+    private final Point MoveStart;
+    private final Point MoveEnd;
+    private Point oldStart;
+    private Point oldEnd;
 
-    public Move(Canvas canvas, Shape shape, Point drawStart, Point drawEnd) {
-        this.shape = shape;
-
-        Point dispMoved = new Point(drawEnd.x - drawStart.x, drawEnd.y - drawStart.y);
+    public Move(Canvas canvas, Point MoveStart, Point MoveEnd) {
+        this.canvas = canvas;
+        this.MoveStart = MoveStart;
+        this.MoveEnd = MoveEnd;
+        this.shape = canvas.getShape(MoveStart);
+        Move();
+    }
+    
+    private void Move(){
+        Point dispMoved = new Point(MoveEnd.x - MoveStart.x, MoveEnd.y - MoveStart.y);
         Point newShapeStart = new Point(shape.getStart().x + dispMoved.x, shape.getStart().y+ dispMoved.y);
         Point newShapeEnd = new Point(shape.getEnd().x + dispMoved.x,shape.getEnd().y + dispMoved.y);
         
-        
-        String shapeType = getType(shape);
         if (shape == null) return;
+        this.shapeType = getType(shape);
+        this.oldStart = shape.getStart();
+        this.oldEnd = shape.getEnd();
         canvas.delete(shape);
-        Drawer drawer = new Drawer(canvas,shapeType, newShapeStart, newShapeEnd, shape.getColor());
+        Drawer drawer = new Drawer(canvas, shapeType, newShapeStart, newShapeEnd, shape.getColor());
+        this.shape = drawer.getShape();
+        this.canvas.repaint();
     }
+    
     private String getType(Shape shape)
     {
         Type type;
@@ -51,6 +66,18 @@ public class Move {
                 return "Line";
         }
         return null;
+    }
+
+    @Override
+    public void Reverse() {
+        canvas.delete(shape);
+        Drawer drawer = new Drawer(canvas, shapeType, oldStart, oldEnd, shape.getColor());
+        this.shape = drawer.getShape();
+    }
+
+    @Override
+    public void Do() {
+        Move();
     }
 
 }
