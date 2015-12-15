@@ -40,7 +40,7 @@ public class Elipse extends Shape {
         
         if(isFill()){
             g.fill(new Ellipse2D.Double(x, y, width, height));
-            g.setColor(Color.YELLOW);
+            g.setColor(Color.black);
             g.draw(new Ellipse2D.Double(x, y, width+stThickness/2, height+stThickness/2));
         }
         else

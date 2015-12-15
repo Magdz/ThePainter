@@ -38,7 +38,7 @@ public abstract class Shape {
         this.color = color;
       //  this.length = length;
         this.stColor = stColor;
-        this.stThickness = stThickness;
+        this.stThickness = 1;
         this.x = x;
         this.y = y;
     }

@@ -33,7 +33,7 @@ public class Polygon extends Shape {
        g.setStroke(new BasicStroke((float) stThickness));
        if(isFill()){
            g.fillPolygon(xPoints,yPoints,sides);
-           g.setColor(Color.YELLOW);
+           g.setColor(Color.black);
            g.drawPolygon(xPoints,yPoints,sides);
        }
        else

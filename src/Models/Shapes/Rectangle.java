@@ -33,7 +33,7 @@ public class Rectangle extends Polygon {
         
         if(isFill()){
             g.fill(new Rectangle2D.Double(x, y, width, height));
-            g.setColor(Color.blue);
+            g.setColor(Color.black);
             g.draw(new Rectangle2D.Double(x, y, width+stThickness/2, height+stThickness/2));
         }
         else

@@ -7,6 +7,7 @@ package Controllers;
 
 import Models.Layers.Canvas;
 import java.awt.Color;
+import static java.awt.Color.BLACK;
 import java.awt.Point;
 import models.shapes.*;
 
@@ -20,6 +21,7 @@ public class Drawer extends Action {
     private final Point drawStart;
     private final Point drawEnd;
     private final Color Color;
+    private final Color stColor = BLACK;
     
     public Drawer(Canvas canvas, String ShapeType, Point drawStart, Point drawEnd,Color Color) {
         this.canvas = canvas;
@@ -34,7 +36,7 @@ public class Drawer extends Action {
     private void Draw(){
         switch (ShapeType) {
             case "Triangle":
-                Triangle Triangle = new Triangle(Color,Color,5,drawStart.x,drawStart.y);
+                Triangle Triangle = new Triangle(Color,stColor,5,drawStart.x,drawStart.y);
                 int[] xPoints = new int[2];
                 xPoints[0] = ((drawStart.x+drawEnd.x)/2)+50;
                 xPoints[1] = drawEnd.x;
@@ -56,17 +58,17 @@ public class Drawer extends Action {
                 canvas.addShape(Square);
                 break;
             case "Ellipse":
-                Elipse Ellipse =new Elipse(Color,Color,5,Math.min(drawStart.x, drawEnd.x),Math.min(drawStart.y, drawEnd.y), Math.abs(drawStart.y-drawEnd.y), Math.abs((drawStart.x-drawEnd.x))); 
+                Elipse Ellipse =new Elipse(Color,stColor,1,Math.min(drawStart.x, drawEnd.x),Math.min(drawStart.y, drawEnd.y), Math.abs(drawStart.y-drawEnd.y), Math.abs((drawStart.x-drawEnd.x))); 
                 this.shape = Ellipse;
                 canvas.addShape(Ellipse);
                 break;
             case "Circle":
-                Circle Circle = new Circle(Color,Color,1,Math.min(drawStart.x, drawEnd.x),Math.min(drawStart.y, drawEnd.y), Math.abs((drawStart.x-drawEnd.x)/2));
+                Circle Circle = new Circle(Color,stColor,1,Math.min(drawStart.x, drawEnd.x),Math.min(drawStart.y, drawEnd.y), Math.abs((drawStart.x-drawEnd.x)/2));
                 this.shape = Circle;
                 canvas.addShape(Circle);
                 break;
             case "Line":
-                Line Line = new Line(Color,Color,5,drawStart.x,drawEnd.x,drawStart.y,drawEnd.y);
+                Line Line = new Line(stColor,stColor,1,drawStart.x,drawEnd.x,drawStart.y,drawEnd.y);
                 this.shape = Line;
                 canvas.addShape(Line);
                 break;
