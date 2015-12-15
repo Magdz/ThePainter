@@ -101,4 +101,9 @@ public class Rectangle extends Polygon {
     public Point getEnd(){
         return this.End;
     }
+    
+    @Override
+    public java.awt.Shape getShape() {
+        return new Rectangle2D.Double(x, y, width, height);
+    } 
 }

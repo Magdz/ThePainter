@@ -134,4 +134,5 @@ public abstract class Shape {
     public abstract boolean contains(Point2D Point);
     public abstract Point getStart();
     public abstract Point getEnd();
+    public abstract java.awt.Shape getShape();
 }

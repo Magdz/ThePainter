@@ -107,4 +107,9 @@ public class Elipse extends Shape {
         return this.End;
     }
 
+    @Override
+    public java.awt.Shape getShape() {
+        return new Ellipse2D.Double(x, y, width, height);
+    }
+
 }

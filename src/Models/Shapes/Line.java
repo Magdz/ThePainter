@@ -86,5 +86,10 @@ public class Line extends Shape {
     public Point getEnd() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public java.awt.Shape getShape() {
+        return new Line2D.Double(x, y, x1, y1);
+    }
     
 }

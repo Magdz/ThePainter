@@ -6,7 +6,6 @@
 package Controllers;
 
 import Models.Layers.Canvas;
-import java.awt.image.BufferedImage;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedInputStream;
@@ -25,7 +24,7 @@ import models.shapes.Shape;
  */
 public class SaveLoad {
     
-    private ArrayList shapes;
+    private ArrayList<Shape> shapes;
     private Canvas canvas;
     
     public void Save(String Format,ArrayList shapes){
@@ -59,7 +58,9 @@ public class SaveLoad {
             } catch (Exception ex) {}
         }
         try (XMLEncoder XMLEncoder = new XMLEncoder(new BufferedOutputStream(fOutput))) {
-            XMLEncoder.writeObject(shapes);
+            shapes.stream().forEach((shape) -> {
+                XMLEncoder.writeObject(shape.getShape());
+            });
         }
     }
     
