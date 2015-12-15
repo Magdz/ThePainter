@@ -282,13 +282,6 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        shapesPane.setLayer(shape_oval, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_circle, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_rect, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_square, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_line, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        shapesPane.setLayer(shape_tri, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         javax.swing.GroupLayout shapesPaneLayout = new javax.swing.GroupLayout(shapesPane);
         shapesPane.setLayout(shapesPaneLayout);
         shapesPaneLayout.setHorizontalGroup(
@@ -323,6 +316,12 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(shape_line))
                     .addComponent(shape_tri)))
         );
+        shapesPane.setLayer(shape_oval, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_circle, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_rect, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_square, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_line, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        shapesPane.setLayer(shape_tri, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout drawAreaLayout = new javax.swing.GroupLayout(drawArea);
         drawArea.setLayout(drawAreaLayout);
@@ -410,6 +409,11 @@ public class GUI extends javax.swing.JFrame {
                 buttons_entered(evt);
             }
         });
+        menu_save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_saveActionPerformed(evt);
+            }
+        });
 
         menu_import.setText("Import");
         menu_import.setContentAreaFilled(false);
@@ -426,6 +430,11 @@ public class GUI extends javax.swing.JFrame {
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 buttons_entered(evt);
+            }
+        });
+        menu_import.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_importActionPerformed(evt);
             }
         });
 
@@ -446,11 +455,6 @@ public class GUI extends javax.swing.JFrame {
                 buttons_entered(evt);
             }
         });
-
-        menubarPane.setLayer(menu_new, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        menubarPane.setLayer(menu_save, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        menubarPane.setLayer(menu_import, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        menubarPane.setLayer(menu_export, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout menubarPaneLayout = new javax.swing.GroupLayout(menubarPane);
         menubarPane.setLayout(menubarPaneLayout);
@@ -473,6 +477,10 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(menu_export, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(438, Short.MAX_VALUE))
         );
+        menubarPane.setLayer(menu_new, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        menubarPane.setLayer(menu_save, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        menubarPane.setLayer(menu_import, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        menubarPane.setLayer(menu_export, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         tool_cursor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Assets/Cursor-15.png"))); // NOI18N
         tool_cursor.setToolTipText("Select");
@@ -974,6 +982,16 @@ public class GUI extends javax.swing.JFrame {
         canvas2.add(shapesPane);
 
     }//GEN-LAST:event_menu_newActionPerformed
+
+    private void menu_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_saveActionPerformed
+        SaveLoad Save = new SaveLoad();
+        Save.Save("xml", canvas.getAllShapes());
+    }//GEN-LAST:event_menu_saveActionPerformed
+
+    private void menu_importActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_importActionPerformed
+        SaveLoad Load = new SaveLoad();
+        Load.Load("xml", canvas);
+    }//GEN-LAST:event_menu_importActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Menu;
